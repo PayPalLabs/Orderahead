@@ -1,5 +1,5 @@
 <_>
-   <form_key>ZNfwiIoGiUFpJhcX</form_key>
+   <form_key>9LAdNoIvUtX8UQgk</form_key>
    <name>PayPal_OrderAhead</name>
    <channel>community</channel>
    <version_ids>
@@ -10,9 +10,10 @@
 Include payment method, design package all in one</description>
    <license>Open Software License (OSL)</license>
    <license_uri>http://opensource.org/licenses/osl-3.0.php</license_uri>
-   <version>0.9.0</version>
-   <stability>devel</stability>
-   <notes>0.9.0 first release</notes>
+   <version>0.9.1</version>
+   <stability>alpha</stability>
+   <notes>0.9.1: alpha release
+0.9.0: first release</notes>
    <authors>
       <name>
          <name>PayPal</name>
@@ -41,7 +42,7 @@ Include payment method, design package all in one</description>
             <max/>
          </max>
          <files>
-            <files>                      </files>
+            <files>                        </files>
          </files>
       </package>
       <extension>
