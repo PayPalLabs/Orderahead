@@ -1,0 +1,36 @@
+<?php
+/**
+ * PayPal Sales
+ *
+ * @package      :  PayPal_Sales
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<?php $orderDetailParams = $this->getRequest()->getParams(); ?>
+<div class="content-box greybg">
+    
+    <div id="merchant-box_<?php echo $orderDetailParams['s']; ?>"></div>
+        
+    <div id="confirm-qr-box_<?php echo $orderDetailParams['s']; ?>"></div>
+        
+    <div id="order-list-box_<?php echo $orderDetailParams['s']; ?>"></div>
+        
+    <div id="cart-total-box_<?php echo $orderDetailParams['s']; ?>"></div>			
+        
+    <div class="pay-now" id="contshop_<?php echo $orderDetailParams['s']; ?>" style="display:none">
+        <a href="#" onclick="forwardURL(storeRootUrl + '/paypalsales/order/recenttemplate');" class="glossy-button"><?php echo $this->__('Back') ?></a>
+    </div>	
+        
+</div>
+
+<script>
+    selectNav(3);
+    getOrderInfoPageJSON(<?php echo $orderDetailParams['order_id']; ?>, <?php echo $orderDetailParams['s']; ?>);
+</script>
+	

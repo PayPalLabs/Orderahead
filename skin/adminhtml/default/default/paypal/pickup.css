@@ -1,0 +1,75 @@
+/**
+ * Pickup
+ *
+ * @package      :  Paypal_Pickup
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+.open-date-time table {
+    float: left;
+    width: 600px;
+}
+
+.open-date-time input,
+.open-date-time select {
+    float: left;
+    margin: 2px 0 0 0;
+}
+
+.open-date-time select {
+    margin: 0;
+}
+
+.open-date-time label {
+    float: left;
+    padding: 2px 5px;
+}
+
+.store-hour-exceptions table {
+    float: left;
+    width: 700px;
+}
+
+.store-hour-exceptions table tr.headings {
+    display: none;
+}
+
+.pickup-time {
+    float: right;
+}
+
+.store-hour-exceptions table label.label-radio {
+    padding: 2px 5px 0 2px;
+}
+
+.store-hour-exceptions table label.label-first {
+    padding: 2px 2px 0 0;
+}
+
+.store-hour-exceptions table label.label-last {
+    padding: 2px 0 0 2px;
+}
+
+.store-hour-exceptions .ex-validate-datetime {
+    background: none;
+    margin: 0;
+    padding-left: 0;
+}
+
+.store-hour-exceptions table tr td.last {
+    border-color: #DADFE0;
+    border-style: solid;
+    border-width: 0 1px 1px;
+}
+
+.store-hour-exceptions table tr td .calendar-trig {
+    margin-left: 2px;
+}
+
+.grid table.border .validation td {border-right:0;padding:0 4px !important;border-bottom:1px solid #ddd !important} 
+.grid table.border .validation td div {padding-top:3px;padding-bottom:3px;} 

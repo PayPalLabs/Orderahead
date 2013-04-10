@@ -1,0 +1,458 @@
+<?php
+/**
+ * PayPal Index Page
+ *
+ * @package      :  
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<div id="containers">
+    <!-- Map popup container -->
+    <div id="popupMask" class="popup-mask"></div>
+    <div id="popup" class="popup-box">
+        <div class="button-popup">
+            <a href="#" onclick="closePopup()" class="closebtn"><img src="<?php echo $this->getSkinUrl('images/ico_close_82x82.png');?>"></a>
+        </div>		
+        <div class="popup-box-shadow">
+            <iframe id="map" src="" width="100%" height="280" seamless></iframe>
+        </div>
+
+    </div>
+
+    <!-- Product Info container -->
+    <div data-role="page" id="productInfo"></div>
+</div>
+
+<div id="templates">
+    <!-- Navigation List Template -->
+    <div id="navListTemplate">
+        <a href="%url%">%name%</a>
+    </div>
+
+    <!-- Product List Template -->
+    <div id="productListTemplate">
+        <li onclick="forwardURL('%url%');">
+            <div class="product-image">%image%</div>
+            <div class="product-content">
+                <div class="product-title">%title%</div>
+                <div class="product-description">%description%</div>
+            </div>
+        </li>
+    </div>
+
+    <!-- Product List Template -->
+    <div id="productListTitleTemplate">	
+        <div class="productlist-title" onclick="toggleNav();">
+            <a href="#">%category%</a>
+        </div>
+    </div>
+
+    <!-- Product Detail Template -->
+    <div id="productDetailTemplate">
+        <div class="product-detail">
+            <div class="product-detail-image"><a href="javascript:showProductInfo('%sid%')"><img id="productImage_%sid%" src=""></a></div>
+            <div class="product-detail-content">
+                <div class="product-detail-title"><a href="javascript:showProductInfo('%sid%')">%name%
+                        <img src="<?php echo $this->getSkinUrl('images/ico-detail-arrow.png') ?>" width="25" border="0" align="absbottom"></a>
+                </div>
+                <div class="product-detail-description">					
+                    <div class="product-topprice" id="product-defprice_%sid%">
+                        <div class="defpricebox" id="defpricebox"><span id="productTotalDefPriceTop_%sid%"><s>%fmtprice%</s></span>&nbsp;&nbsp;</div>
+                        <div class="prices-box" id="finalpricebox"><span id="productTotalFinalPriceTop_%sid%">%fmtfinalprice%</span> </div>
+                    </div>
+                    <div class="save-favorites %savedfav%" id="favorite_%sid%" style="display:none" onclick="savefav('%sid%_%id%')">%favtext%</div>
+                </div>				
+            </div>
+            <div class="product-desc"><p>%shortdesc%</p></div>
+        </div>
+        <div class="defprice" id="defprice_%sid%">%price%</div>
+        <div class="specialprice" id="specialprice_%sid%">%specialprice%</div>
+        <div class="finalprice" id="finalprice_%sid%">%finalprice%</div>
+        <div id="longDesc_%sid%" class="long-desc"><div class='product-box-container'>%longdesc%</div></div>
+    </div>
+
+    <!-- Product Option Select Template  -->
+    <div id="productOptionSelectTemplate">		
+        <div class="product-box-shadow">
+            <div class="product-option-row1">
+                <div class="product-option-title">%title%</div>
+            </div>
+            <div class="product-option-row2">							
+                <div class="product-box-input margintopzero">
+                    <div class="ui-select">
+                        <div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-btn-up-c">
+                            <span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text txt-left txt-padding4"><span id="opt_%sid%_%option_id%_text"></span></span>
+                                <span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span></span>
+                            <select name="%selectname%[%option_id%]" id="opt_%sid%_%option_id%" onchange="productOptionSelectUpdate('opt_%sid%_%option_id%','%sid%', '%currency_code%')"></select>
+                        </div>
+                    </div>
+                </div>	
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Option Select Item Template  -->
+    <div id="productOptionSelectItemTemplate">
+        <option value="%option_id%" price="%price%" %selected%>%title% %optprice%</option>
+    </div>	
+
+    <!-- Product Option Radio Template  -->
+    <div id="productOptionRadioTemplate">
+        <div class="product-box-shadow" style="%display%">
+            <div class="product-option-row1">
+                <div class="product-option-title">%title%</div>
+            </div>
+            <div class="product-option-row2">
+                <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+                    <fieldset data-role="controlgroup" data-type="horizontal" class="ui-corner-all ui-controlgroup ui-controlgroup-horizontal">
+                        <div id="div_%sid%_%option_id%" class="ui-controlgroup-controls"></div>
+                    </fieldset>
+                </div>
+            </div>
+            <div id="count_%sid%_%option_id%" class="radio-count">0</div>
+        </div>
+    </div>
+
+    <!-- Product Option Radio Item Template  -->	
+    <div id="productOptionRadioItemTemplate">
+        <div class="ui-radio ui-radio-%radiotype%">
+            <input type="radio" name="options[%parent_option_id%]" id="opt_%sid%_%parent_option_id%_%count%" value="%option_id%" price="%price%" %radiochecked%>
+            <label for="opt_%sid%_%parent_option_id%_%count%" id="label_%sid%_%parent_option_id%_%count%" data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-btn-up-c %ui-radio% ui-corner-left" onclick="updateProductRadio('%sid%','%parent_option_id%','%count%')" onmouseup="updateProductTotal('%sid%','%currency_code%')">
+                <span class="ui-btn-inner ui-corner-left"><span class="ui-btn-text">%title%<br> %fmtprice% </span></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Product Option Radio Hidden Template  -->
+    <div id="productOptionRadioHiddenTemplate">
+        <input type="hidden" name="options[%parent_option_id%]" id="opt_%sid%_%parent_option_id%_%count%" value="%option_id%" price="%price%">
+    </div>
+
+    <!-- Product Option Checkbox Template  -->
+    <div id="productOptionCheckboxTemplate">
+        <div class="product-box-shadow">
+            <div class="product-option-row1">
+                <div class="product-option-title">%title%</div>
+            </div>
+            <div class="product-option-chk-row2">
+                <div data-role="fieldcontain" class="ui-field-contain ui-body ui-br">
+                    <fieldset data-role="controlgroup" data-type="horizontal" class="ui-corner-all ui-controlgroup ui-controlgroup-vertical">
+                        <div id="div_%sid%_%option_id%" class="ui-controlgroup-controls"></div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Option Checbox Item Template  -->	
+    <div id="productOptionCheckboxItemTemplate">
+        <div class="ui-checkbox ui-checkbox-1">
+            <input type="checkbox" name="options[%parent_option_id%][%option_id%]" id="opt_%sid%_%parent_option_id%_%option_id%" value="%option_id%" price="%price%">
+            <label for="opt_%sid%_%parent_option_id%_%option_id%" id="label_%sid%_%parent_option_id%_%option_id%" data-corners="true" data-shadow="false" data-iconshadow="true" data-wrapperels="span" data-theme="c" class="ui-btn ui-btn-up-c %ui-checkbox% ui-corner-left" onclick="updateProductCheckbox('%sid%','%parent_option_id%','%option_id%')" onmouseup="updateProductTotal('%sid%','%currency_code%')">
+                <span class="ui-btn-inner ui-corner-left"><span class="ui-btn-text"><div class="radiolist-off"></div>%title% &nbsp; %fmtprice% </span></span>
+            </label>
+        </div>
+    </div>	
+
+    <!-- Product Price Template  -->
+    <div id="productTotalPriceTemplate">
+        <div class="product-summary">
+            <div class="product-qty-label">Qty</div>
+            <div id="productQty_%sid%" class="product-qty">
+                <div class="product-qty-select">
+                    <div class="product-box-input">
+                        <div class="ui-select">
+                            <div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-btn-up-c txt-left">
+                                <span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text"><span id="qty_%sid%_text">1</span></span>
+                                    <span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span></span>
+                                <select name="qty" id="qty_%sid%" onchange="productOptionSelectUpdate('qty_%sid%','%sid%', '%currency_code%')"></select>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="product-price"><span class="product-price-label"></span><br><span id="productTotalPrice_%sid%">%price%</span></div>
+        </div>
+    </div>
+
+    <!-- one page Error Template  -->
+    <div id="ErrorPageTemplate">	
+        <div id="errorchange" class="cart-empty">
+            <div class="error-box-shadow">
+                <!--div class="cart-row1">Error</div-->
+                <div class="error-desc">%error%</div>
+            </div>
+        </div>
+    </div>		
+
+    <!-- Favorite Title Template -->
+    <div id="favoriteListTitleTemplate">	
+        <div class="favoritelist-title">%category%</div>
+    </div>
+    <!-- Favorite List Template -->
+    <div id="favoriteListTemplate">
+        <li onclick="forwardURL('%url%');">
+            <div class="product-image">%image%</div>
+            <div class="product-content">
+                <div class="product-title">%title%</div>
+                <div class="product-description">%description%</div>
+            </div>
+        </li>
+    </div>
+
+    
+    <!-- Cart page - ordered item Template -->
+    <div id="CartOrderedItemTemplate">
+        <div class="box-shadow" id="cart-list-container_%rid%_%id%"  onclick="hideDeleteConfirmation()">	
+            <div class="cart-row1" id="cartitem">
+                <div class="cart-list-name"><a href="#" onclick="forwardURL('%url%');">%product%</a></div>
+                <div class="cart-list-remove">
+                    <div id="btnDelete_%rid%%id%" class="delete-button" onclick="cartDelete('%rid%%id%')" style="display: block;"></div>
+                    <div id="btnDelete_%rid%%id%_Confirm" class="delete-button-confirm" onclick="deleteitem('%rid%_%id%')" style="display: none;"><?php echo $this->__('Remove') ?></div>
+                </div>
+            </div>		
+            <div class="cart-row2">
+                <div class="cart-list-attr">
+                    <br><b><span class="item-amount" id="item_price%rid%%id%">%fmtprice%</span></b>
+                </div>
+                <div class="cart-list-qty">					
+                    <div class="product-qty-select">
+                        <div class="product-box-input qtyselect">
+                            <div class="ui-select">
+                                <div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="arrow-d" data-iconpos="right" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-icon-right ui-btn-up-c txt-left">
+                                    <span class="ui-btn-inner ui-btn-corner-all"><span class="ui-btn-text"><span id="qty_%rid%_%id%_text">1</span></span>
+                                        <span class="ui-icon ui-icon-arrow-d ui-icon-shadow">&nbsp;</span></span>
+                                    <select name="cart[%id%][qty]" id="qty_%rid%_%id%" onchange="CartQtySelectUpdate('qty_%rid%_%id%','%rid%')"></select>
+                                </div>
+                            </div>
+                        </div>					
+                    </div>				
+                </div>
+
+            </div>
+            <div class="cart-row3">
+                <div class="cart-list-attr">%optionstr%</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Select Item Template  -->
+    <div id="CartSelectItemTemplate">
+        <option value="%option_id%" %selected%>%option_id%</option>
+    </div>
+
+    <!-- Cart page - total box Template -->
+    <div id="CartTotalTemplate">
+        <div class="box-shadow" id="cart-total-container">
+            <div class="total-row total-row-top">
+                <div class="clabel"><?php echo $this->__('Subtotal') ?></div>
+                <div class="subtotal" id="subtotal%rid%">%subtotal%</div>
+            </div>	
+            <div class="total-row" id="cart-discount" style="display:none">
+                <div class="clabel"><?php echo $this->__('Discount') ?></div>
+                <div id="taxes">%discount%</div>		
+            </div>
+            <div class="total-row">
+                <div class="clabel">%shipping_title%</div>
+                <div id="taxes">%shipping%</div>		
+            </div>				
+            <div class="total-row">
+                <div class="clabel"><?php echo $this->__('Taxes') ?></div>
+                <div id="taxes">%tax%</div>		
+            </div>
+            <div class="split"></div>
+            <div class="total-row cart-total-amount">
+                <div class="clabel"><?php echo $this->__('Total') ?></div>
+                <div class="total" id="total%rid%">%grand_total%</div>
+            </div>				
+        </div>
+    </div>
+
+    <!-- Cart page - pickup time Template -->
+    <div id="CartPickupTemplate">	
+        <div class="sectionbox-shadow" id="cart-time-container">
+            <div class="sectionbox-row1">
+                <div class="sectionbox-title sectionbox-row1-text"><?php echo $this->__('Pick Up Date/Time:') ?></div>
+            </div>		
+            <div class="sectionbox-row2">
+                <input type="text" id="selectedDateTime_%sid%" readonly="true" value="<?php echo $this->__('Select') ?>" class="ui-input-arrow" style="display:none;width:100%;text-align:left;"/>
+            </div>	
+        </div>
+        <!--div class="pickup-time-text">Open till 8:30pm today.
+                <br>Guaranteed fresh for 10 minutes!
+        </div-->
+    </div>
+
+    <!-- Cart page - Pay Now button Template -->        
+    <div id="CartPayNowTemplate">
+        <a href="#" onclick="%function%" id="paynow" class="glossy-button"><?php echo $this->__('Pay Now') ?></a>
+    </div>
+
+    <!-- Cart page - static_block Template -->
+    <div id="CartStaticBlockTemplate">
+        <div class="box-shadow" id="cart-staticblock">
+            %static_block%		
+        </div>
+    </div>
+
+    <!-- Confirmation page - Merchant box Template -->
+    <div id="ConfirmMerchantTemplate">	
+        <div id="jamba-container">
+            <div class="jamba-left">%img%</div>
+            <div class="jamba-right">
+                <div class="clabel1">Your order at</div>
+                <div class="cvalue1">%name%</div>
+                <!--div class="clabel2">Pickup time:</div>
+                <div class="cvalue2">%pickup_time%</div-->			
+            </div>
+        </div>
+        <div id="store-location-container">
+            <a href="javascript:openPopup(%id%)" data-rel="popup">Store Location: %location% 
+                <img src="<?php echo $this->getSkinUrl('images/ico-detail-arrow.png') ?>" width="25" border="0" align="absbottom"></a>
+        </div>		
+    </div>
+
+    <!-- Confirmation page - QR box Template -->
+    <div id="ConfirmQRTemplate">	
+        <div class="box-shadow" id="qr-container">
+            <div class="qr-row1">%buyername%</div>
+            <div class="qr-hr"></div>
+            <div class="qr-row2">
+                <div class="qr-row2-left">
+                    <?php echo $this->__('Transaction ID:') ?>
+                    <span class="bluetext">%id%</span>
+                </div>
+                <div class="qr-row2-right">
+                    <div class="qr-row2-right-text">
+                        <div class="qr-row2-label">Amount Paid</div>
+                        <div class="qr-row2-amount">%grand_total%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="qr-row3">%qrcode%</div>	
+            <div class="qr-row4">
+                %instruction%
+            </div>					
+        </div>	
+    </div>
+
+    <!-- Confirmation page - total box Template -->
+    <div id="ConfirmTotalTemplate">
+        <div class="box-shadow" id="cart-total-container-thankyou">
+            <div class="total-row total-row-top">
+                <div class="clabel"><?php echo $this->__('Subtotal') ?></div>
+                <div class="subtotal" id="subtotal">%subtotal%</div>
+            </div>
+            <div class="total-row">
+                <div class="clabel"><?php echo $this->__('Shipping') ?></div>
+                <div id="taxes">%shipping%</div>		
+            </div>			
+            <div class="total-row">
+                <div class="clabel"><?php echo $this->__('Taxes') ?></div>
+                <div id="taxes">%tax%</div>		
+            </div>
+            <div class="split"></div>
+            <div class="total-row cart-total-amount">
+                <div class="clabel"><?php echo $this->__('Total') ?></div>
+                <div class="total" id="total">%grand_total%</div>
+            </div>				
+        </div>
+    </div>
+
+    <!-- Confirmation page - ordered item Template -->
+    <div id="ConfirmOrderedItemTemplate">
+        <div class="box-shadow" id="cart-list-container-thankyou">
+            <div class="cart-row1">
+                <div class="cart-list-name">%product%</div>
+                <div class="cart-list-remove"><?php echo $this->__('Qty:') ?> <b>%quantity%</b></div>
+            </div>		
+            <div class="cart-row2">
+                <b><span id="item_price">%fmtprice%</span></b>
+            </div>		
+            <div class="cart-row3">
+                <div class="cart-list-attr-full">%optionstr%</div>
+            </div>
+        </div>		
+    </div>
+
+    <!-- Recent Order page - total box Template -->
+    <div id="RecentOrderTemplate">
+        <div class="box-shadow darkgrey">
+            <div class="recentorder-row">
+                <div class="ctext ctimetext">%created_at%</div>
+            </div>		
+            <div id="order-list-attr-%rid%%id%"></div>	
+            <div class="order-status">Status: %status%</div>							
+            <div class="recentorder-row">
+                <div class="ctext cvalue1">Total %grand_total%</div>
+            </div>	
+            <!--div class="split"></div-->		
+            <div class="recentorder-row2" onclick="forwardURL(storeRootUrl + 'paypalsales/order/detailstemplate/order_id/%id%');">
+                <div class="vieworder secondary-button">View Order</div>
+            </div>				
+        </div>	
+    </div>
+            
+    <!-- Recent Order item page - total box Template -->
+    <div id="RecentOrderItemTemplate">	
+        <div class="recentorderitem-row">
+            <div class="order-qty">%quantity%</div>
+            <div class="order-item-text">%product%</div>
+            <div class="order-item-price">%fmtprice%</div>
+        </div>		
+    </div>
+    
+    <!-- Recent Order page - ordered item Template -->
+    <div id="OrderedInfoTemplate">
+        <div class="box-shadow whitebg" id="order-list-container-%rid%">
+        </div>		
+    </div>	
+
+
+    <!-- Recent Order page - ordered item Template -->	
+    <div id="OrderedInfoItemTemplate">		
+        <div class="cart-row1">
+            <div class="cart-list-name">%product%</div>
+            <div class="cart-list-remove"><?php echo $this->__('Qty:') ?> <b>%quantity%</b></div>
+        </div>		
+        <div class="cart-row2">
+            <b><span id="item_price">%fmtprice%</span></b>
+        </div>		
+        <div class="cart-row3">
+            <div class="cart-list-attr-full">%optionstr%</div>
+        </div>
+    </div>
+
+    <!-- Homepage - Links Template -->	
+    <div id="HomepageLinksTemplate">	
+        <div class="homepage-link-box homepage-split" onclick="forwardURL('%url%');">
+            <div class="home-link hometop-link">
+                <span class="ui-btn-inner ui-btn-corner-all">%title%
+                    <span class="homelink-arrow" style="float:right">&nbsp;</span>
+                </span>
+            </div>
+        </div>		
+    </div>
+
+    <!-- Homepage - Featured item Template -->	
+    <div id="HomepageFeaturedTemplate">	
+        <div class="homepage-link-box" onclick="forwardURL('%url%');">
+            <div class="homepage-img-box">
+                <div class="homepage-img">%image%</div>
+            </div>
+            <div class="home-link">
+                <span class="ui-btn-inner ui-btn-corner-all">%title%
+                    <span class="homelink-arrow" style="float:right">&nbsp;</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

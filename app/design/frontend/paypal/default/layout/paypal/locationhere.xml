@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <locationhere_onepage_storemap>
+        <reference name="content">
+            <block type="paypal_locationhere/json_storemap" output="toHtml" name="storemap" />
+        </reference>
+    </locationhere_onepage_storemap>
+    
+    <locationhere_onepage_storemaptemplate>
+        <reference name="root">
+            <action method="setTemplate"><template>page/simple.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="core/template" name="storemap_template" as="storemap_template" template="checkout/map/store_map.phtml" />
+        </reference>
+    </locationhere_onepage_storemaptemplate>
+</layout>

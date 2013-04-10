@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config>
+    <sections>
+        <payment>
+            <groups>
+                <paypal_checkin translate="label">
+                    <label>Paypal Check-in</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>21</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>
+                        <active translate="label comment">
+                            <label>Enabled</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </active>
+
+                        <title translate="label comment">
+                            <label>Title</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>1</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                        </title>
+
+						<allowspecific translate="label">
+							<label>Payment Applicable From</label>
+							<frontend_type>select</frontend_type>
+							<sort_order>60</sort_order>
+							<source_model>adminhtml/system_config_source_payment_allspecificcountries</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+						</allowspecific>
+						
+						<specificcountry translate="label">
+							<label>Countries Payment Applicable From</label>
+							<frontend_type>multiselect</frontend_type>
+							<sort_order>70</sort_order>
+							<source_model>adminhtml/system_config_source_country</source_model>
+							<show_in_default>1</show_in_default>
+							<show_in_website>1</show_in_website>
+							<show_in_store>0</show_in_store>
+							<depends><allowspecific>1</allowspecific></depends>
+						</specificcountry>
+
+                       <webservice_root_url translate="label comment">
+                            <label>Webservice root url</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </webservice_root_url>
+                        						        
+                       <client_id translate="label comment">
+                            <label>Application ID</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>2</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </client_id>
+                                     
+                        <client_secret translate="label comment">
+                            <label>Application Secret</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>3</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+				        </client_secret>
+                        
+                        <merchant_email translate="label comment">
+                            <label>Paypal merchant ID(Email ID)</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>4</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+				        </merchant_email>
+				        
+                        <refresh_token translate="label comment">
+                            <label>Refresh Token</label>
+                            <frontend_type>Link</frontend_type>
+                            <frontend_model>paypal_checkin/adminhtml_authlink</frontend_model>
+                            <sort_order>5</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </refresh_token>
+                        
+                        <shipping_method translate="label">
+                            <label>Shipping method</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>6</sort_order>
+                            <source_model>paypal_checkin/system_config_source_shipping_activecarriers</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </shipping_method>
+
+                    </fields>
+                </paypal_checkin>
+            </groups>
+        </payment>
+    </sections>
+</config>

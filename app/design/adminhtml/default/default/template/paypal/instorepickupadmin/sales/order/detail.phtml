@@ -1,0 +1,120 @@
+<?php
+/**
+ * Instore Pickup Admin
+ *
+ * @package      :  Paypal_Instorepickupadmin
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+?>
+<?php
+$order = $this->getOrder();
+$orderAdminDate = $this->formatDate($order->getCreatedAtDate(), 'medium', true);
+$orderStoreDate = $this->formatDate($order->getCreatedAtStoreDate(), 'medium', true);
+?>
+<div data-role="page" data-transition="none">
+    <?php echo $this->getChildHtml('toolbar')?>
+    <div data-role="content">
+        <?php echo $this->getChildHtml('global_message')?>
+        <form action="<?php echo $this->getSaveAction()?>" method="post" name="order_form" id="order_form" data-ajax="false">
+            <table id="table-column-toggle" class="ui-responsive table-stroke" style="width:100%">
+                <thead>
+                <tr>
+                    <th data-priority="1"></th>
+                    <th data-priority="persist"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><label><strong><?php echo $this->__('Order')?> #:</strong></label></td>
+                    <td>
+                        <label style="color: #1e90ff;"><?php echo $order->getIncrementId() ?></label>
+                    </td>
+                </tr>
+                <tr>
+                    <td><label><strong><?php echo $this->__('Status')?>:</strong></label></td>
+                    <td><label style="color:<?php echo Mage::helper('paypal_instorepickupadmin')->getOrderStateColor($order->getState())?>"><?php echo Mage::helper('paypal_instorepickupadmin')->getOrderStateLabel($order)?></label></td>
+
+                </tr>
+                <tr>
+                    <td><label><strong><?php echo $this->__('Purchased On')?>:</strong></label></td>
+                    <td><label><?php echo $orderStoreDate ?></label></td>
+
+                </tr>
+                <?php if ($order->getShippingDescription()): ?>
+                <tr>
+                    <td><label><strong><?php echo $this->__('Shipping Option')?>:</strong></label></td>
+                    <td>
+                        <label><?php echo $order->getShippingDescription()?></label>
+                    </td>
+                </tr>
+                    <?php endif;?>
+                <tr>
+                    <td><label><strong><?php echo $this->__('Customer')?>:</strong></label></td>
+                    <td>
+                        <label><?php echo $order->getCustomerName()?></label><br/>
+                        <a href="mailto:<?php echo $order->getCustomerEmail() ?>"><?php echo $order->getCustomerEmail() ?></a>
+                    </td>
+                </tr>
+
+                <?php if ($order->getPickupTime()) :?>
+                <tr>
+                    <td><label><strong><?php echo $this->__('Pickup Time')?>:</strong></label></td>
+                    <td>
+                        <label><?php echo $order->getPickupTime()?></label>
+                    </td>
+                </tr>
+                <?php endif;?>
+                </tbody>
+            </table>
+
+            <?php echo $this->getChildHtml('order_items')?>
+
+            <?php if($this->canAddComment()):?>
+                <?php if($order->canShip()):?>
+                <fieldset>
+                    <label><?php echo $this->__('Comments')?></label><br/>
+                    <textarea onchange="$('#creditmemo_comment_text').val($(this).val())" style="height: 100px;" name="shipment[comment_text]" placeholder="<?php echo $this->__('....')?>"></textarea>
+                </fieldset>
+                <?php else: ?>
+                <fieldset>
+                    <label><?php echo $this->__('Comments')?></label><br/>
+                    <div style="display: none;">
+                        <select name="history[status]" class="select" id="history_status" >
+                            <?php foreach ($this->getStatuses() as $_code=>$_label): ?>
+                            <option value="<?php echo $_code ?>"<?php if($_code==$this->getOrder()->getStatus()): ?> selected="selected"<?php endif; ?>><?php echo $_label ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <textarea onchange="$('#creditmemo_comment_text').val($(this).val())" style="height: 100px;" name="history[comment]" placeholder="<?php echo $this->__('....')?>"></textarea>
+                </fieldset>
+                <?php endif;?>
+            <?php endif;?>
+            <div>
+                <input type="submit" value="<?php echo $this->__('Save')?>"  data-iconpos="left" data-theme="e">
+
+                <?php if($this->canCreditmemo()):?>
+                <input type="button" value="<?php echo $this->__('Refund')?>" onclick="if(confirm('<?php echo $this->__('Full amount will be refunded, even if the order is partially fulfilled. Would you like to proceed?')?>')){$('#order_refund').submit();}" data-iconpos="left" data-theme="e">
+                <?php endif;?>
+            </div>
+            <?php echo $this->getChildHtml('order_history')?>
+            <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+            <input type="hidden" name="order_id" value="<?php echo $order->getId()?> id="order_id"/>
+        </form>
+        <?php if($this->canCreditmemo()):?>
+        <form method="post" action="<?php echo $this->getRefundAction()?>" data-ajax="false" name="order_refund" id="order_refund">
+            <input type="hidden" name="creditmemo[comment_text]" id="creditmemo_comment_text">
+            <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+            <input type="hidden" name="isAjax" value="1" />
+            <input type="hidden" name="order_id" value="<?php echo $order->getId()?> id="order_id"/>
+        </form>
+        <?php endif;?>
+    </div><!-- /content -->
+
+</div><!-- /page -->

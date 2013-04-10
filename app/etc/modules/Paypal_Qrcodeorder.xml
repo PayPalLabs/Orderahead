@@ -1,0 +1,11 @@
+<config>
+    <modules>
+        <Paypal_Qrcodeorder>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Paypal_Qrcodeorder>
+        <depends>
+            <Paypal_Qrcode/>
+        </depends>
+    </modules>
+</config>       

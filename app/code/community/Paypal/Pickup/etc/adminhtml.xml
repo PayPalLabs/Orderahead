@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <catalog>
+                        <children>
+                            <place module="paypal_pickup">
+                                <title>Manage Places</title>
+                                <sort_order>0</sort_order>
+                            </place>
+                        </children>
+                    </catalog>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <paypal_pickup translate="title">
+                                        <title>In-store Fulfillment</title>
+                                        <sort_order>100</sort_order>
+                                    </paypal_pickup>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <menu>
+        <catalog>
+            <children>
+                <place module="paypal_pickup">
+                    <title>Manage Places</title>
+                    <sort_order>0</sort_order>
+                    <action>adminhtml/place/index</action>
+                </place>
+            </children>
+        </catalog>
+    </menu>
+</config>

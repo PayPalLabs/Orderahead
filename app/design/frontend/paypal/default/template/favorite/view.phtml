@@ -1,0 +1,34 @@
+<?php
+/**
+ * PayPal Favorite
+ *
+ * @package      :  PayPal_Favorite
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<?php $favoriteViewParams = $this->getRequest()->getParams(); ?>
+<div class="content-box">	
+	<ul id="favoriteList_<?php echo $favoriteViewParams['s']; ?>" class="product-list"></ul>	
+
+	<div class="fav-empty" id="fav-empty_<?php echo $favoriteViewParams['s']; ?>" style="display:none">
+		<div class="box-shadow">
+			<div class="cart-row1"></div>
+			<div class="cart-empty-desc cart-row2"><?php echo $this->__('You do not have any favorite item.') ?></div>
+		</div>
+		<div class="pay-now" id="contshop_<?php echo $favoriteViewParams['s']; ?>">
+			<a href="#" onclick="forwardURL(storeRootUrl);" class="glossy-button">Continue Shopping</a>
+		</div>
+	</div>
+		
+</div>
+
+<script>
+    selectNav(2);
+    getFavoriteListJSON(<?php echo $favoriteViewParams['s'] ?>); 
+</script>

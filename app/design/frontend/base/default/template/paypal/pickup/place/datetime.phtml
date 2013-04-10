@@ -1,0 +1,160 @@
+<?php
+/**
+ * Pickup
+ *
+ * @package      :  Paypal_Pickup
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+?>
+<?php $format = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM); ?>
+<?php if ($place = $this->getPlace()): ?>
+<?php $placeId = $place->getPlaceId(); ?>
+    <div class="place-information">
+        <span><?php echo $place->getDescription() ?></span><br/>
+        <?php
+            $placeAddress = '';
+            $address = $place->getAddress();
+            $city = $place->getCity();
+            $region = $place->getRegion();
+            $regionId = $place->getRegionId();
+            $countryCode = $place->getCountry();
+            $postcode = $place->getPostcode();
+            if (!empty($regionId)) {
+                $regionName = Mage::getModel('directory/region')->load($regionId)->getName();
+            }else {
+                $regionName = $region;
+            }
+            if (!empty($countryCode)) {
+                $countryName = Mage::getModel('directory/country')->load($countryCode)->getName();
+            }
+            if ($address !== '') {
+                $placeAddress .= $address;
+            }
+            if ($city !== '') {
+                $placeAddress .= !empty($placeAddress) ? ', ' . $city : $city;
+            }
+            if ($regionName !== '') {
+                $placeAddress .= !empty($placeAddress) ? ', ' . $regionName : $regionName;
+            }
+            if ($postcode && ($postcode !== '')) {
+                $placeAddress .= empty($regionName) ? ', ' . $postcode : ' ' . $postcode;
+            }
+            if ($countryName && ($countryName !== '')) {
+                $placeAddress .= !empty($placeAddress) ? ', ' . $countryName : $countryName;
+            }
+        ?>
+        <span><?php echo $placeAddress ?></span>
+    </div>
+<?php if ($place->getAllowPickupDatetime()): ?>
+    <?php if ($this->isPickupSpecifyDatetime()): ?>
+        <div class="instore-shipping-method instore-specify" id="place-<?php echo $placeId ?>">
+            <?php $openDays = $this->getAllowedDays(); ?>
+            <?php if (count($openDays)): ?>
+                <!--Date selector-->
+                <div id="place-date-<?php echo $placeId ?>" class="place-date">
+                    <label for="date-select-<?php echo $placeId?>"><?php echo $this->helper('paypal_pickup')->__('Date') ?></label>
+                    <?php if ($place->getDatetimeEnableTimeSelector()): ?>
+                        <select id="date-select-<?php echo $placeId?>" class="validate-select required-entry place-date" onchange="renderHourSelector(this,'<?php echo $placeId ?>', true, true)">
+                            <option value=""><?php echo $this->helper('paypal_pickup')->__('Please select date') ?></option>
+                            <?php foreach ($openDays as $day => $data): ?>
+                            <option value="<?php echo $day ?>">
+                                <?php echo $day ?>
+                                <?php
+                                    /*
+                                $openDatetimeArr = explode('/',$day);
+                                if(!empty($openDatetimeArr) && count($openDatetimeArr) == 3){
+                                    echo Mage::app()->getLocale()->date()->setDate($openDatetimeArr[0])->setMonth($openDatetimeArr[1])->setYear($openDatetimeArr[2])->toString($format);
+                                }
+                                    */
+                                ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php else: ?>
+                        <select id="date-select-<?php echo $placeId?>" class="validate-select required-entry place-date" onchange="renderHourSelector(this,'<?php echo $placeId ?>', false, true)">
+                            <option value=""><?php echo $this->helper('paypal_pickup')->__('Please select date') ?></option>
+                            <?php foreach ($openDays as $day => $data): ?>
+                            <option value="<?php echo $day ?>">
+                                <?php echo $day ?>
+                                <?php
+                                        /*
+                                    $openDatetimeArr = explode('/',$day);
+                                    if(!empty($openDatetimeArr) && count($openDatetimeArr) == 3){
+
+                                        echo Mage::app()->getLocale()->date()->setDate($openDatetimeArr[0])->setMonth($openDatetimeArr[1])->setYear($openDatetimeArr[2])->toString($format);
+                                    }*/
+                                ?>
+                            </option>
+                            <?php endforeach; ?>
+                        </select>
+                    <?php endif; ?>
+                </div>
+                <!--Time selector-->
+                <?php if ($place->getDatetimeEnableTimeSelector()): ?>
+                    <div id="place-time-<?php echo $placeId ?>" class="place-time"
+                         style="display: block;">
+                        <!--Hour selector-->
+                        <div id="place-hour-<?php echo $placeId ?>" class="place-hour"
+                             style="display: none;">
+                            <label for="hour-select-<?php echo $placeId?>"><?php echo $this->helper('paypal_pickup')->__('Hour') ?></label>
+                            <select id="hour-select-<?php echo $placeId?>" class="validate-select required-entry place-hour"
+                                    onchange="renderMinuteSelector(this, '<?php echo $placeId ?>', true)">
+                                <option><?php echo $this->helper('paypal_pickup')->__('--') ?></option>
+                            </select>
+                        </div>
+                        <!--Minute selector-->
+                        <div id="place-minute-<?php echo $placeId ?>" class="place-minute"
+                             style="display: none;">
+                            <label for="minute-select-<?php echo $placeId?>"><?php echo $this->helper('paypal_pickup')->__('Minutes') ?></label>
+                            <select id="minute-select-<?php echo $placeId?>" class="validate-select required-entry place-minute" onchange="updatePlaceMinute(this, '<?php echo $placeId ?>')">
+                                <option><?php echo $this->helper('paypal_pickup')->__('--') ?></option>
+                            </select>
+                        </div>
+                    </div>
+                    <script type="text/javascript">
+                        //<![CDATA[
+                        dateConfig[<?php echo $placeId ?>] = <?php echo $this->getJsonConfig() ?>;
+                        //]]>
+                    </script>
+                <?php endif; ?>
+            <?php endif; ?>
+        </div>
+    <?php else: ?>
+        <!--Duration Options-->
+        <div class="instore-shipping-method instore-durations">
+            <?php $durations = $this->getAllowedDurationsOptions(); ?>
+            <?php if ($durations): ?>
+                <label for="durations-options-select-<?php echo $placeId ?>"><?php echo $this->helper('paypal_pickup')->__('Will collect in') ?></label>
+                <select id="durations-options-select-<?php echo $placeId ?>" class="select required-entry place-durations-options" name="place_durations_options" onchange="updatePlaceDurationsOptions(this, '<?php echo $placeId ?>')">
+                    <option value=""><?php echo $this->helper('paypal_pickup')->__('Please select option') ?></option>
+                    <?php foreach ($durations as $time): ?>
+                    <?php
+                    if ((int)$time < 60) {
+                        $timeLabel = $this->__('%s minutes', $time);
+                    } else {
+                        $timeHour = floor((int)$time / 60);
+                        $timeMinute = (int)$time % 60;
+                        if ($timeHour > 1) {
+                            $timeLabel = $this->__('%s hours', $timeHour);
+                        } else {
+                            $timeLabel = $this->__('%s hour', $timeHour);
+                        }
+                        if ($timeMinute > 0) {
+                            $timeLabel .= $this->__(' %s minutes', $timeMinute);
+                        }
+                    }
+                    ?>
+                    <option value="<?php echo $time ?>"><?php echo $timeLabel ?></option>
+                    <?php endforeach; ?>
+                </select>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+<?php endif; ?>
+<?php endif; ?>

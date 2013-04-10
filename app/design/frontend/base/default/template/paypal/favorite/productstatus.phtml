@@ -1,0 +1,61 @@
+<?php
+/**
+ * PayPal Favorite
+ *
+ * @package      :  PayPal_Favorite
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<?php
+if (Mage::getStoreConfig('catalog/favorite/enable')) {
+?>
+<ul class="add-to-links">
+    <li>
+        <a id="add_to_favorite" favorite="<?php echo $this->getFavoriteStatus(); ?>" productid="<?php echo $this->getProduct()->getId() ?>" href="javascript:void(0)" class="link-wishlist"></a>
+    </li>
+</ul>
+<div style="clear:both"></div>
+<script>
+document.observe('dom:loaded', function() {
+    var state = $('add_to_favorite').readAttribute('favorite');
+    if (state == 0) {
+        $('add_to_favorite').innerHTML = 'Add to Favorite';
+    }
+    else {
+        $('add_to_favorite').innerHTML = 'Delete from Favorite';
+    }
+});
+$('add_to_favorite').observe('click', function() {
+    var state = this.readAttribute('favorite');
+    var storeRootUrl = '<?php echo Mage::app()->getStore()->getHomeUrl(); ?>';
+    var product_id = this.readAttribute('productid');
+
+    if (state == 0) {
+        new Ajax.Request(storeRootUrl + 'favorite/index/add/product_id/' + product_id, {
+          onSuccess: function(response) {
+            if (response.responseJSON.success) {
+                $('add_to_favorite').innerHTML = 'Delete from Favorite';
+                $('add_to_favorite').setAttribute('favorite', 1);
+            }
+          }
+        });
+    }
+    else {
+        new Ajax.Request(storeRootUrl + 'favorite/index/delete/product_id/' + product_id, {
+          onSuccess: function(response) {
+            if (response.responseJSON.success) {
+                $('add_to_favorite').innerHTML = 'Add to Favorite';
+                $('add_to_favorite').setAttribute('favorite', 0);
+            }
+          }
+        });
+    }
+});
+</script>
+<?php } ?>

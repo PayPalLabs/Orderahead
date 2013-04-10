@@ -1,0 +1,38 @@
+<config>
+    <modules>
+        <Paypal_Sales>
+            <version>0.9.0</version>
+        </Paypal_Sales>
+    </modules>
+
+    <frontend>
+        <routers>
+            <paypalsales>
+                <use>standard</use>
+                <args>
+                    <module>Paypal_Sales</module>
+                    <frontName>paypalsales</frontName>
+                </args>
+            </paypalsales>
+        </routers>
+        <layout>
+            <updates>
+                <paypal_sales>
+                    <file>paypal/sales.xml</file>
+                </paypal_sales>
+            </updates>
+        </layout>  
+    </frontend>
+    <global>
+        <blocks>
+            <paypal_sales>
+                <class>Paypal_Sales_Block</class>
+            </paypal_sales>
+        </blocks>
+        <helpers>
+            <paypal_sales>
+                <class>Paypal_Sales_Helper</class>
+            </paypal_sales>
+        </helpers>
+    </global>
+</config>

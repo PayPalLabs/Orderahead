@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="head">
+            <action method="addItem"><type>skin_js</type><name>js/paypal/checkin/ppbridge.js</name></action>
+            <action method="addItem"><type>skin_js</type><name>js/paypal/checkin/generic-merchant-core.js</name></action>
+        </reference>
+    </default>
+    
+    <checkout_cart_index>
+        <reference name="checkout.cart.methods">
+            <block type="paypal_checkin/shortcut" name="checkin.cart.methods" before="-" after='deliverytime' template="paypal/checkin/cart/shortcut.phtml">
+                <action method="setIsQuoteAllowed"><value>1</value></action>
+            </block>
+        </reference>
+    </checkout_cart_index>	
+<!--
+    <catalog_product_view>
+        <reference name="product.info.addtocart">
+            <block type="paypal_checkin/shortcut" name="checkin.product.info.cart" before="-" template="paypal/checkin/product/shortcut.phtml">
+                
+            </block>
+        </reference>
+    </catalog_product_view>
+    <catalog_product_view>
+        <reference name="product.info.addtocart">
+            <block type="page/html_wrapper" name="product.info.addtocart.paypal.wrapper" translate="label">
+                <label>PayPal Checkin Shortcut Wrapper</label>
+                <block type="paypal_checkin/shortcut" name="product.info.checkin.button" template="paypal/checkin/shortcut.phtml"/>
+                
+            </block>
+        </reference>
+        <update handle="SHORTCUT_popup" />
+        <reference name="right">
+            <block type="paypal/logo" name="paypal.partner.right.logo" template="paypal/partner/logo.phtml"> -->
+                <!--action method="setLogoType"><value>wePrefer_150x60</value></action-->
+     <!--
+            </block>
+        </reference>
+    </catalog_product_view>-->
+</layout>

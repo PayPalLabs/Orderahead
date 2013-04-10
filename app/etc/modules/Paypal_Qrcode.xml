@@ -1,0 +1,8 @@
+<config>
+    <modules>
+        <Paypal_Qrcode>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Paypal_Qrcode>
+    </modules>
+</config>       

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Paypal_Instorepickupadmin>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Mage_Sales/>
+            </depends>
+        </Paypal_Instorepickupadmin>
+    </modules>
+</config>

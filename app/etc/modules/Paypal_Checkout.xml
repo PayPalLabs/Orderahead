@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Paypal_Checkout>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Paypal_Checkin/>
+                <Paypal_Core/>
+            </depends>
+        </Paypal_Checkout>
+    </modules>
+</config>

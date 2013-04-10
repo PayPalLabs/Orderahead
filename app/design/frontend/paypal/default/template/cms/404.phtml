@@ -1,0 +1,29 @@
+<?php
+/**
+ * PayPal Cms
+ *
+ * @package      :  PayPal_Cms
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<div class="content-box greybg">
+    <div class="box-shadow">
+        <div class="cart-row1"><?php echo $this->__('404 PAGE NOT FOUND') ?></div>
+        <div class="cart-empty-desc cart-row2">
+            <?php echo $this->__('The page you requested was not found') ?>
+            <ul style="font-size: 15px !important;">
+                <li><?php echo $this->__('If you typed the URL directly, please make sure the spelling is correct.') ?></li>
+                <li><?php echo $this->__('If you clicked on a link to get here, the link is outdated.') ?></li>
+            </ul>
+        </div>
+    </div>
+    <div class="pay-now">
+        <a href="#" onclick="forwardURL(storeRootUrl);" class="glossy-button"><?php echo $this->__('Continue Shopping') ?></a>
+    </div>
+</div>

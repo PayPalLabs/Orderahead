@@ -1,0 +1,35 @@
+<?php
+/**
+ * PayPal Index Page
+ *
+ * @package      :  
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<div id="menu-bar">
+    <div id="menuNav_0" class="menu-bar-item selected" onclick="navigationURL(storeRootUrl); selectNav(0)"><?php echo $this->__('Home') ?></div>
+    <div class="menu-bar-divider"></div>
+    <div id="menuNav_1" class="menu-bar-item" onclick="toggleNav(); selectNav(1)"><?php echo $this->__('Menu') ?></div>
+    <div class="menu-bar-divider"></div>
+    <div id="menuNav_2" class="menu-bar-item" onclick="navigationURL(storeRootUrl + 'favorite/index/viewtemplate'); selectNav(2)"><?php echo $this->__('Favorites') ?></div>
+    <div class="menu-bar-divider"></div>
+    <div id="menuNav_3" class="menu-bar-item" onclick="navigationURL(storeRootUrl + '/jsoncheckout/cart/template'); selectNav(3)"><div id="cartCount" class="cart-count"></div><img src="<?php echo $this->getSkinUrl('images/ico-cart.png')?>" width="20" border="0"></div>
+</div>
+<div id="nav">
+    <div id="category-scroll">
+        <div id="category-nav">
+            <ul id="accordionContainer" class="accordion"><ul>
+        </div>		
+        <script>
+            getNavigationJSON();
+            updateCartCount(<?php echo Mage::helper('paypal_checkout')->getNumberOfItems(); ?>);
+        </script>		
+        <div class="paypal-logo"></div>
+    </div>
+</div>

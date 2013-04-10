@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <paypalfavorite_index_view>
+        <reference name="content">
+            <block type="paypal_favorite/json_favorite" output="toHtml" name="product_list"/>
+        </reference>
+    </paypalfavorite_index_view>
+    <paypalfavorite_index_viewtemplate>
+        <reference name="content">
+            <block type="paypal_favorite/product_list" name="customer_favorite_template" template="paypal/favorite/view.phtml" />
+        </reference>
+    </paypalfavorite_index_viewtemplate>
+    <paypalfavorite_index_add>
+        <reference name="content">
+            <block type="paypal_favorite/json_add" output="toHtml" name="success"/>
+        </reference>
+    </paypalfavorite_index_add>
+    <paypalfavorite_index_delete>
+        <reference name="content">
+            <block type="paypal_favorite/json_delete" output="toHtml" name="success"/>
+        </reference>
+    </paypalfavorite_index_delete>
+    <catalog_product_view>
+        <reference name="product.info">
+            <block type="paypal_favorite/product_view" name="fav_product_status" as="fav_product_status" template="paypal/favorite/productstatus.phtml">
+                <action method="setChild"><name>extrahint</name><block>extrahint</block></action>
+            </block>
+            <action method="setChild"><name>extrahint</name><block>fav_product_status</block></action>
+        </reference>
+    </catalog_product_view>
+</layout>

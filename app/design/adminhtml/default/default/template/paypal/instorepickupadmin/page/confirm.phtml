@@ -1,0 +1,25 @@
+<?php
+/**
+ * Instore Pickup Admin
+ *
+ * @package      :  Paypal_Instorepickupadmin
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+?>
+<div data-role="popup" id="<?php echo $this->getId() ?>" data-overlay-theme="a" data-theme="c" data-dismissible="false" style="max-width:400px;" class="ui-corner-all">
+    <div data-role="header" data-theme="a" class="ui-corner-top">
+        <h1><?php echo $this->getTitle() ?></h1>
+    </div>
+    <div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+        <h3 class="ui-title"><?php echo $this->getMessage()?></h3>
+        <?php foreach($this->getButtons() as $button):?>
+        <a href="#" data-role="button"  <?php echo $button['attributes']?>><?php echo $button['title'] ?></a>
+        <?php endforeach;?>
+    </div>
+</div>

@@ -1,0 +1,64 @@
+<?php
+/**
+ * Instore Pickup Admin
+ *
+ * @package      :  Paypal_Instorepickupadmin
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+?>
+<div data-role="page">
+    <?php echo $this->getChildHtml('toolbar')?>
+    <div data-role="content">
+        <?php echo $this->getChildHtml('global_message')?>
+        <form class="roundeds" action="<?php echo $this->getFormAction()?>" method="post" name="form_search_order" id="form_search_order" data-ajax="false">
+            <fieldset>
+                <label><?php echo $this->__('Order #')?></label><br/>
+                <input name="order_id" type="text"/>
+            </fieldset>
+
+            <fieldset>
+                <label style="width:100%"><?php echo $this->__('First Name or Last name or Email')?></label><br/>
+                <input name="email_firstname_lastname" type="text"/>
+            </fieldset>
+
+            <fieldset>
+                <label><?php echo $this->__('Order State')?></label><br/>
+                <label class="select ">
+                    <?php $orderStates = $this->getOrderStates()?>
+                    <select name="order_state" class="custom">
+                        <option value=""></option>
+                        <?php foreach($orderStates as $key =>$state):?>
+                        <option value="<?php echo $key?>"><?php echo $state ?></option>
+                        <?php endforeach;?>
+                    </select>
+                </label>
+            </fieldset>
+
+            <?php if(Mage::helper('core')->isModuleEnabled('Paypal_Pickup')):?>
+            <fieldset>
+                <label><?php echo $this->__('Store Location')?></label><br/>
+                <label class="select ">
+                    <?php $places = $this->getPlaces()?>
+                    <select name="place_id" class="custom">
+                        <option value=""></option>
+                        <?php foreach($places as $place):?>
+                        <option value="<?php echo $place->getId()?>"><?php echo $place->getPlaceName() ?></option>
+                        <?php endforeach;?>
+                    </select>
+                </label>
+            </fieldset>
+            <?php endif;?>
+            <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+            <div data-role="controlgroup">
+                <input type="submit" value="<?php echo $this->__('Search')?>" data-theme="e">
+            </div>
+        </form>
+    </div><!-- /content -->
+
+</div><!-- /page -->

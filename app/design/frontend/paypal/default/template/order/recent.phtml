@@ -1,0 +1,40 @@
+<?php
+/**
+ * PayPal Checkout
+ *
+ * @package      :  PayPal_Checkout
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<?php $pageName = "Recent Order";?>
+<?php $orderParams = $this->getRequest()->getParams(); ?>
+	
+<div class="content-box greybg">
+	
+	<div class="page-title text-title"><?php echo $this->__('My Recent Orders') ?></div>
+	<div id="productError_<?php echo $orderParams['s']; ?>" style="display:none"></div>	
+		
+	<div id="recentorder-list-box_<?php echo $orderParams['s']; ?>"></div>	
+		
+	<div class="cart-empty" id="cart-empty_<?php echo $orderParams['s']; ?>" style="display:none">
+		<div class="box-shadow">
+			<div class="error-desc cart-row2" style="margin-top:10px;"><?php echo $this->__('You have not yet made any purchases.') ?></div>
+		</div>
+		<div class="pay-now" id="contshop_<?php echo $orderParams['s']; ?>">
+			<a href="#" onclick="forwardURL(storeRootUrl);" class="glossy-button"><?php echo $this->__('Continue Shopping') ?></a>
+		</div>
+	</div>
+		
+
+</div>
+
+<script>
+	selectNav(1);
+	getRecentOrderPageJSON("<?php echo $orderParams['s']; ?>");
+</script>

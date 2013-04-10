@@ -1,0 +1,58 @@
+<?php
+/**
+ * Instore Pickup Admin
+ *
+ * @package      :  Paypal_Instorepickupadmin
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+?>
+<?php if ($_item = $this->getItem()): ?>
+<?php
+    $isAllowDeliver = Mage::getSingleton('admin/session')->isAllowed('sales/order/actions/ship');
+    $_order = Mage::registry('current_order');
+    $qtyOrdered = $_item->getQtyOrdered()*1;
+    $qtyDeliver = $_item->getQtyShipped()*1;
+    $qtyRefunded = $_item->getQtyRefunded()*1;
+    $qtyRemain = $qtyOrdered - $qtyDeliver;
+    $qtyDeliverAvailable = 0;
+?>
+<div class="ui-grid-c">
+    <div class="ui-block-a">
+        <div class="ui-body ui-body-d" style="height:80px;font-size: 11px; text-align: center;">
+            <strong id="label_items_qty_ordered_<?php echo $_item->getId()?>" style="display: block; text-align: center; font-size: 36px;"><?php echo $qtyOrdered ?></strong>
+            <?php echo Mage::helper('sales')->__('Ordered') ?>
+            <input class="items_qty_ordered" item_id="<?php echo $_item->getId()?>" type="hidden" onchange="app.qtyOnChange(this)" type="text" value="<?php echo $qtyOrdered?>" org_value="<?php echo $qtyOrdered?>" name="ordered[<?php echo $_item->getId()?>]" id="items_qty_ordered_<?php echo $_item->getId()?>"/>
+        </div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-body ui-body-d" style="height:80px;font-size: 11px; text-align: center;">
+            <strong id="label_items_qty_remain_<?php echo $_item->getId()?>" style="display: block; text-align: center; font-size: 36px;"><?php echo $qtyRemain ?></strong>
+            <?php echo Mage::helper('sales')->__('Remain') ?>
+            <input  class="items_qty_remain" item_id="<?php echo $_item->getId()?>" type="hidden"  value="<?php echo $qtyRemain?>" org_value="<?php echo $qtyRemain?>" name="remain[<?php echo $_item->getId()?>]" id="items_qty_remain_<?php echo $_item->getId()?>"/>
+        </div>
+    </div>
+    <div class="ui-block-c">
+        <div class="ui-body ui-body-d" style="height:80px;font-size: 11px; text-align: center;">
+            <strong id="label_items_qty_deliver_<?php echo $_item->getId()?>" style="display: block; text-align: center; font-size: 36px;">-</strong>
+            <?php echo Mage::helper('sales')->__('Deliver') ?>
+            <input class="items_qty_deliver" item_id="<?php echo $_item->getId()?>" type="hidden" value="<?php echo $qtyDeliverAvailable?>" org_value="<?php echo $qtyDeliverAvailable?>" max_deliver_qty="<?php echo $qtyRemain?>" min_deliver_qty="0" name="shipment[items][<?php echo $_item->getId()?>]" id="items_qty_deliver_<?php echo $_item->getId()?>"/>
+        </div>
+    </div>
+    <div class="ui-block-d bt-full">
+        <div style="height:80px;font-size: 11px; text-align: center;">
+            <div class="top">
+                <input value="" <?php if(!($isAllowDeliver && $_order->canShip() && $qtyRemain > 0)) echo 'disabled="disabled"';?> data-icon="arrow-u-big" data-iconpos="notext" onclick="app.increaseQtyDeliver('<?php echo $_item->getId()?>')" type="button" data-inline="true"  data-corners="false" data-theme="b" style="margin: 0!important;"/>
+            </div>
+            <div class="bottom">
+                <input value="" <?php if(!($isAllowDeliver && $_order->canShip() && $qtyRemain > 0)) echo 'disabled="disabled"';?> data-icon="arrow-d-big" data-iconpos="notext" type="button" onclick="app.decreaseQtyDeliver('<?php echo $_item->getId()?>')" data-inline="true"  data-corners="false" data-theme="b" style="margin: 0!important;" />
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>

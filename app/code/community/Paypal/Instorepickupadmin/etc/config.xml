@@ -1,0 +1,152 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Instore Pickup Admin
+ *
+ * @package      :  Paypal_Instorepickupadmin
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+-->
+<config>
+    <modules>
+        <Paypal_Instorepickupadmin>
+            <version>0.1.3</version>
+        </Paypal_Instorepickupadmin>
+    </modules>
+    <global>
+        <models>
+            <paypal_instorepickupadmin>
+                <class>Paypal_Instorepickupadmin_Model</class>
+            </paypal_instorepickupadmin>
+            <sales>
+                <rewrite>
+                    <order_shipment_comment>Paypal_Instorepickupadmin_Model_Rewrite_Sales_Order_Shipment_Comment</order_shipment_comment>
+                    <order_invoice_comment>Paypal_Instorepickupadmin_Model_Rewrite_Sales_Order_Invoice_Comment</order_invoice_comment>
+                    <order_creditmemo_comment>Paypal_Instorepickupadmin_Model_Rewrite_Sales_Order_Creditmemo_Comment</order_creditmemo_comment>
+                </rewrite>
+            </sales>
+        </models>
+        <blocks>
+            <paypal_instorepickupadmin>
+                <class>Paypal_Instorepickupadmin_Block</class>
+            </paypal_instorepickupadmin>
+            <adminhtml>
+                <rewrite>
+                    <sales_order_view_tab_history>Paypal_Instorepickupadmin_Block_Rewrite_Adminhtml_Sales_Order_View_Tab_History</sales_order_view_tab_history>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        <helpers>
+            <paypal_instorepickupadmin>
+                <class>Paypal_Instorepickupadmin_Helper</class>
+            </paypal_instorepickupadmin>
+        </helpers>
+        <resources>
+            <paypal_instorepickupadmin_setup>
+                <setup>
+                    <module>Paypal_Instorepickupadmin</module>
+                </setup>
+            </paypal_instorepickupadmin_setup>
+        </resources>
+    </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <use>admin</use>
+                <args>
+                    <modules>
+                        <Paypal_Instorepickupadmin before="Mage_Adminhtml">Paypal_Instorepickupadmin_Adminhtml</Paypal_Instorepickupadmin>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
+    <frontend>
+        <layout>
+            <updates>
+                <paypal_instorepickupadmin>
+                    <file>paypal/instore_pickup_admin.xml</file>
+                </paypal_instorepickupadmin>
+            </updates>
+        </layout>
+        <routers>
+            <paypal_instorepickupadmin>
+                <use>standard</use>
+                <args>
+                    <module>Paypal_Instorepickupadmin</module>
+                    <frontName>pickup</frontName>
+                </args>
+            </paypal_instorepickupadmin>
+        </routers>
+        <translate>
+            <modules>
+                <Paypal_Instorepickupadmin>
+                    <files>
+                        <default>Paypal_Instorepickupadmin.csv</default>
+                    </files>
+                </Paypal_Instorepickupadmin>
+            </modules>
+        </translate>
+    </frontend>
+    <adminhtml>
+        <translate>
+            <modules>
+                <Paypal_Instorepickupadmin>
+                    <files>
+                        <default>Paypal_Instorepickupadmin.csv</default>
+                    </files>
+                </Paypal_Instorepickupadmin>
+            </modules>
+        </translate>
+        <layout>
+            <updates>
+                <paypal_instorepickupadmin>
+                    <file>paypal/instore_pickup_admin.xml</file>
+                </paypal_instorepickupadmin>
+            </updates>
+        </layout>
+        <events>
+            <controller_action_predispatch_adminhtml_index_login>
+                <observers>
+                    <paypal_instorepickupadmin>
+                        <class>paypal_instorepickupadmin/observer</class>
+                        <method>actionPreDispatchAdmin</method>
+                    </paypal_instorepickupadmin>
+                </observers>
+            </controller_action_predispatch_adminhtml_index_login>
+            <sales_order_status_history_save_before>
+                <observers>
+                    <paypal_instorepickupadmin>
+                        <type>singleton</type>
+                        <class>paypal_instorepickupadmin/observer</class>
+                        <method>orderStatusHistorySaveBefore</method>
+                    </paypal_instorepickupadmin>
+                </observers>
+            </sales_order_status_history_save_before>
+
+        </events>
+    </adminhtml>
+    <default>
+        <paypal_instorepickupadmin>
+            <general>
+                <use_jquery_cdn>1</use_jquery_cdn>
+            </general>
+            <order_color_code>
+                <new>red</new>
+                <pending_payment>green</pending_payment>
+                <processing>blue</processing>
+                <complete>yellow</complete>
+                <closed>brown</closed>
+                <canceled>black</canceled>
+                <holded>gray</holded>
+                <payment_review>pink</payment_review>
+            </order_color_code>
+        </paypal_instorepickupadmin>
+    </default>
+</config>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <!--
+    Default layout, loads most of the pages
+    -->
+    <jsoncatalog_category_list>
+        <reference name="content">
+            <block type="paypal_catalog/json_category_list" output="toHtml" name="catalog_categories"/>
+        </reference>
+    </jsoncatalog_category_list>
+	
+    <jsoncatalog_product_listtemplate>
+        <reference name="content">    
+            <block type="core/template" name="product_list_template" template="catalog/product/list.phtml"/>
+        </reference>
+    </jsoncatalog_product_listtemplate>
+        
+    <jsoncatalog_product_list>
+        <reference name="content">  
+            <block type="paypal_catalog/json_product_list" output="toHtml" name="product_list"/>
+        </reference>
+    </jsoncatalog_product_list>
+
+    <jsoncatalog_index_navigation>
+        <reference name="content">
+            <block type="paypal_catalog/json_navigation" output="toHtml"  name="catalog_navigation" />
+        </reference>
+    </jsoncatalog_index_navigation>
+        
+    <jsoncatalog_product_view>
+        <reference name="content">
+            <block type="paypal_catalog/json_product_view" output="toHtml" name="product_info">
+                <block type="paypal_catalog/json_product_view_media" name="product.info.media" as="media"/>
+                <block type="paypal_catalog/json_product_view_details" name="product.info.details" as="details"/>
+            </block>                        
+        </reference>
+    </jsoncatalog_product_view>
+        
+    <jsoncatalog_product_viewtemplate>
+        <reference name="content">
+            <block type="core/template" name="product_info" as="product_info" template="catalog/product/view.phtml" />
+        </reference>
+    </jsoncatalog_product_viewtemplate>	
+</layout>

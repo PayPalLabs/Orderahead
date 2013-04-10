@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <paypalsales_order_recent>
+        <reference name="content">
+            <block type="paypal_sales/json_order_recent" output="toHtml" name="recentorder" />
+        </reference>
+    </paypalsales_order_recent>
+    
+    <paypalsales_order_recenttemplate>
+        <reference name="content">
+            <block type="core/template" name="recent_order_template" as="recent_order_template" template="order/recent.phtml" />
+        </reference>
+    </paypalsales_order_recenttemplate>
+    
+    <paypalsales_order_details>
+        <reference name="content">
+            <block type="paypal_sales/json_order_details" output="toHtml" name="checkout_success" />
+        </reference>
+    </paypalsales_order_details>
+    
+    <paypalsales_order_detailstemplate>
+        <reference name="content">
+            <block type="core/template" name="recent_order_template" as="recent_order_template" template="order/details.phtml" />
+        </reference>
+    </paypalsales_order_detailstemplate>
+    
+    <paypalsales_email_order_items>
+	    	<block type="sales/order_email_items" name="items" template="email/order/items.phtml"/>
+	 </paypalsales_email_order_items>
+</layout>

@@ -1,0 +1,27 @@
+<config>
+    <modules>
+        <Paypal_Qrcode>
+            <version>0.9.0</version>
+        </Paypal_Qrcode>
+    </modules>
+
+    <frontend>
+        <routers>
+            <paypalqrcode>
+                <use>standard</use>
+                <args>
+                    <module>Paypal_Qrcode</module>
+                    <frontName>paypal_qrcode</frontName>
+                </args>
+            </paypalqrcode>
+        </routers>
+    </frontend>
+
+    <global>
+        <models>
+            <paypal_qrcode>
+                <class>Paypal_Qrcode_Model</class>
+            </paypal_qrcode>
+        </models>
+    </global>
+</config>

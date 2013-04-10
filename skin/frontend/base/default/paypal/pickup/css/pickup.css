@@ -1,0 +1,82 @@
+/**
+ * Pickup
+ *
+ * @package      :  Paypal_Pickup
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+.place-content {
+    width: 100%;
+    margin: 5px 18px;
+}
+
+.place {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.instore-shipping-method {
+    padding: 15px 0;
+    float: left;
+    width: 100%;
+}
+
+.place-content .place-hour,
+.place-content .place-minute,
+.place .place-hour,
+.place .place-minute {
+    float: left;
+    width: 80px;
+    margin: 0 10px 0 0;
+}
+
+.place-time {
+    float: left;
+    width: 75%;
+}
+
+.place-content .place-date,
+.place .place-date {
+    width: 23%;
+    float: left;
+    margin: 0 2% 0 0;
+}
+
+.place-content .place-date label,
+.place-content .place-hour label,
+.place-content .place-minute label,
+.place .place-date label,
+.place .place-hour label,
+.place .place-minute label {
+    float: left;
+    width: 100%;
+}
+
+.place-content .place-date select,
+.place .place-date select {
+    width: 100%;
+}
+
+.place-content .place-hour select,
+.place-content .place-minute select,
+.place .place-hour select,
+.place .place-minute select {
+    width: 100%;
+}
+
+.place-content .instore-durations,
+.place-content .instore-durations select,
+.place .instore-durations,
+.place .instore-durations select {
+    width: 50%;
+}
+
+.place-content .instore-durations select,
+.place .instore-durations select {
+    margin: 0 10px;
+}

@@ -1,0 +1,263 @@
+<?php
+/**
+ * Pickup
+ *
+ * @package      :  Paypal_Pickup
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+?>
+
+<?php
+$_htmlId = $this->getHtmlId() ? $this->getHtmlId() : '_' . uniqid();
+
+$_colspan = 2;
+if (!$this->_addAfter) {
+    $_colspan -= 1;
+}
+$_colspan = $_colspan > 1 ? 'colspan="' . $_colspan . '"' : '';
+?>
+<div id="store_hour_exceptions"></div>
+<div class="grid store-hour-exceptions" id="grid<?php echo $_htmlId ?>" style="position:relative">
+    <table cellpadding="0" cellspacing="0" class="border">
+        <colgroup>
+            <col width="19%"/>
+            <col width="20%"/>
+            <col width="16%"/>
+            <col width="10%"/>
+            <col width="13%"/>
+            <col width="10%"/>
+            <col width="11%"/>
+        </colgroup>
+        <tbody>
+
+        <tr class="headings" id="headings<?php echo $_htmlId ?>">
+            <?php foreach ($this->_columns as $columnName => $column):?>
+            <th><?php echo $column['label'] ?></th>
+            <?php endforeach;?>
+            <th <?php echo $_colspan?>></th>
+        </tr>
+
+        <tr id="addRow<?php echo $_htmlId ?>">
+            <td colspan="<?php echo count($this->_columns) ?>"></td>
+            <td <?php echo $_colspan?>>
+                <button style="" onclick="" class="scalable add" type="button" id="addToEndBtn<?php echo $_htmlId ?>">
+                    <span><?php echo $this->_addButtonLabel ?></span>
+                </button>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+    <input type="hidden" name="<?php echo $this->getElement()->getName() ?>[__empty]" value="" />
+</div>
+<div id="empty<?php echo $_htmlId ?>">
+    <button style="" onclick="" class="scalable add" type="button" id="emptyAddBtn<?php echo $_htmlId ?>">
+        <span><?php echo $this->_addButtonLabel ?></span>
+    </button>
+</div>
+
+<script type="text/javascript">
+    // <!--
+    // create row creator
+    var arrayRow<?php echo $_htmlId ?> = {
+        // define row prototypeJS template
+        template : new Template(
+                '<tr id="#{_id}_data">'
+                <?php foreach ($this->_columns as $columnName => $column):?>
+                        +'<td class="#{_id}-<?php echo $columnName?> value" style="<?php echo $column['style']?>">'
+                        +'<?php echo $this->_renderCellTemplate($columnName)?>'
+                        +'</td>'
+                    <?php endforeach;?>
+                <?php if ($this->_addAfter):?>
+                        +'<td class="last"><button onclick="" class="scalable add" type="button" id="addAfterBtn#{_id}"><span><?php echo Mage::helper('adminhtml')->__('Add after') ?></span></button></td>'
+                    <?php endif;?>
+                        +'<td class="last"><button onclick="arrayRow<?php echo $_htmlId ?>.del(\'#{_id}\')" class="scalable delete" type="button"><span><?php echo Mage::helper('adminhtml')->__('Delete') ?></span></button></td>'
+                +'</tr>'
+                +'<tr class="validation validation-ex" id="#{_id}"><td colspan="2"></td><td class="value" colspan="5"><input id="#{_id}-validate-storehour-ex" type="hidden" class="validate-datetime-ex" value="0"/></td></tr>'
+        ),
+
+        rowsCount : 0,
+
+        add : function(templateData, insertAfterId)
+        {
+            // generate default template data
+            if ('' == templateData) {
+                var d = new Date();
+                var templateData = {
+                    <?php foreach ($this->_columns as $columnName => $column):?>
+                        <?php echo $columnName ?> : '',
+                    <?php endforeach;?>
+                    _id : '_' + d.getTime() + '_' + d.getMilliseconds()
+                };
+            }
+
+            // insert before last row
+            if ('' == insertAfterId) {
+                new Insertion.Before(
+                        $('addRow<?php echo $_htmlId ?>'),
+                        this.template.evaluate(templateData)
+                );
+            }
+            // insert after specified row
+            else {
+                new Insertion.After(
+                        $(insertAfterId),
+                        this.template.evaluate(templateData)
+                );
+            }
+    // set the selected drop-down list item
+    <?php foreach ($this->_columns as $columnName => $column):?>
+        <?php if($column['render_type'] == 'select'):?>
+                var options = $$('td.' + templateData._id + '-' + '<?php echo $columnName?>' + ' option')
+                for(var index = 0; index < options.length; ++index)
+                {
+                    var option = options[index]
+                    if(option.getAttribute('value') == templateData.<?php echo $columnName?>)
+                    {
+                        option.selected = true
+                    }
+                }
+        <?php elseif($column['render_type'] == 'radio'):?>
+            <?php if ($columnName == 'is_open'): ?>
+            var inputBoxId = templateData._id + '_' + '<?php echo $columnName?>'+templateData.<?php echo $columnName?>;
+            var inputBox = $(inputBoxId);
+            if(inputBox){
+                inputBox.checked = true;
+                var senderName = inputBox.getAttribute('rel');
+                if(inputBox.value == '1'){
+                    $$('.'+senderName).invoke('show');
+                }
+                else{
+                    $$('.'+senderName).invoke('hide');
+                }
+            }
+
+            <?php endif; ?>
+        <?php elseif($column['render_type'] == 'datetime'):?>
+            var inputBox = $(templateData._id + '_' + '<?php echo $columnName?>');
+            inputBox.setValue(templateData.<?php echo $columnName?>);
+            this.updateRowCalendar(templateData._id+'_'+'<?php echo $columnName?>');
+        <?php endif;?>
+    <?php endforeach;?>
+    //alert(templateData._id+'_'+'<?php echo $columnName?>');
+
+    <?php if ($this->_addAfter):?>
+    Event.observe('addAfterBtn' + templateData._id, 'click', this.add.bind(this, '', templateData._id));
+        <?php endif;?>
+
+    this.rowsCount += 1;
+    },
+
+    del : function(rowId)
+    {
+        $(rowId).remove();
+        $(rowId + '_data').remove();
+        this.rowsCount -= 1;
+        if (0 == this.rowsCount) {
+            this.showButtonOnly();
+        }
+    },
+
+    showButtonOnly : function()
+    {
+        $('grid<?php echo $_htmlId ?>').hide();
+        $('empty<?php echo $_htmlId ?>').show();
+    },
+
+    updateRowCalendar: function(row){
+        Calendar.setup({
+            inputField : row,
+            ifFormat : '%m/%e/%Y',
+            button : row+'_trig',
+            align : 'Bl',
+            singleClick : true
+        });
+    }
+    }
+
+    // bind add action to "Add" button in last row
+    Event.observe('addToEndBtn<?php echo $_htmlId ?>', 'click', arrayRow<?php echo $_htmlId ?>.add.bind(arrayRow<?php echo $_htmlId ?>, '', ''));
+
+    // add existing rows
+    <?php
+    $_addAfterId = "headings{$_htmlId}";
+    foreach ($this->getArrayRows() as $_rowId => $_row) {
+        echo "arrayRow{$_htmlId}.add(" . $_row->toJson() . ", '{$_addAfterId}');\n";
+        $_addAfterId = $_rowId;
+    }
+    ?>
+
+    // initialize standalone button
+    $('empty<?php echo $_htmlId ?>').hide();
+    Event.observe('emptyAddBtn<?php echo $_htmlId ?>', 'click', function () {
+        $('grid<?php echo $_htmlId ?>').show();
+        $('empty<?php echo $_htmlId ?>').hide();
+        arrayRow<?php echo $_htmlId ?>.add('', '');
+    });
+
+    // if no rows, hide grid and show button only
+    <?php if (!$this->getArrayRows()):?>
+    arrayRow<?php echo $_htmlId ?>.showButtonOnly();
+        <?php endif;?>
+
+    // toggle the grid, if element is disabled (depending on scope)
+    <?php if ($this->getElement()->getDisabled()):?>
+    toggleValueElements({checked:true}, $('grid<?php echo $_htmlId ?>').parentNode);
+        <?php endif;?>
+    // -->
+    function isOpenOnChange(sender){
+        var senderName = $(sender).getAttribute('rel');
+        if(sender.value == '1'){
+            $$('.'+senderName).invoke('show');
+        }
+        else{
+            $$('.'+senderName).invoke('hide');
+        }
+    }
+
+    function datetimeOnChange(el) {
+        var tmp = el.up("tr");
+        var fromHour = tmp.down(".from-hour");
+        var fromMinute = tmp.down(".from-minute");
+        var toHour = tmp.down(".to-hour");
+        var toMinute = tmp.down(".to-minute");
+        var elmId = el.getAttribute("id");
+        var tmp2 = elmId.substring(0, elmId.indexOf("_is_open"));
+        var datetimeDiffElm = $(tmp2 + "-validate-storehour-ex");
+        if (fromHour && fromMinute && toHour && toMinute && datetimeDiffElm) {
+            var datetimeDiff = parseInt(toHour.getValue()) * 60 + parseInt(toMinute.getValue()) - (parseInt(fromHour.getValue()) * 60 + parseInt(fromMinute.getValue()));
+            datetimeDiffElm.setValue(datetimeDiff);
+        }
+    }
+
+    document.observe("dom:loaded", function () {
+        $$(".validate-datetime-ex").each(function(el) {
+            var tmp = el.getAttribute("id");
+            tmp = tmp.substring(0, tmp.indexOf("-"));
+            if ($(tmp)) {
+                var tr = $(tmp).previous();
+                if (tr) {
+                    var fromHour = tr.down(".from-hour");
+                    var fromMinute = tr.down(".from-minute");
+                    var toHour = tr.down(".to-hour");
+                    var toMinute = tr.down(".to-minute");
+                    if (fromHour && fromMinute && toHour && toMinute) {
+                        var datetimeDiff = parseInt(toHour.getValue()) * 60 + parseInt(toMinute.getValue()) - (parseInt(fromHour.getValue()) * 60 + parseInt(fromMinute.getValue()));
+                        el.setValue(datetimeDiff);
+                    }
+                }
+            }
+        });
+    });
+    Validation.addAllThese([
+        ['validate-minutes-displayed', 'Please enter a valid number in range (0,60).', function(v) {
+            return ((v > 0) && (v < 60));
+        }]
+    ]);
+</script>

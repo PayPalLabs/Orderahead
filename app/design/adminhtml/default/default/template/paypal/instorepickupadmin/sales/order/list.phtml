@@ -1,0 +1,55 @@
+<?php
+/**
+ * Instore Pickup Admin
+ *
+ * @package      :  Paypal_Instorepickupadmin
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+?>
+<?php $collection = $this->getCollection()?>
+<div data-role="page">
+    <?php echo $this->getChildHtml('toolbar')?>
+
+    <div data-role="content">
+        <?php if($collection->getSize() > 0):?>
+        <ul data-role="listview" data-inset="true">
+            <?php foreach($collection as $order):?>
+            <li>
+                <a href="<?php echo $this->getOrderDetailUrl($order->getId())?>" data-transition="none">
+                    <div style="border-left:10px solid <?php echo Mage::helper('paypal_instorepickupadmin')->getOrderStateColor($order->getState())?>;" class="clearfix">
+                        <span style="float:left;width:85px;margin: 17px 0 0 0; padding:0 0 0 10px;color:#0068b7;"><?php echo $order->getIncrementId()?></span>
+                        <h2 style="float:left;padding: 0 0 0 10px;">
+                            <?php echo $order->getCustomerName()?>
+                            <label style="display:block;font-weight:normal;color:#004488;font-size: 12px;"><?php echo $order->getCustomerEmail()?></label>
+                        </h2>
+                    </div>
+                </a>
+            </li>
+            <?php endforeach;?>
+        </ul>
+        <?php else:?>
+        <div style="margin: 0 auto;">
+            <p><?php echo $this->__('No result, Please search again!')?></p>
+            <a href="<?php echo $this->getHomeUrl()?>" data-role="button" data-theme="b" data-inline="true" data-rel="back" data-icon="back"><?php echo $this->__('Search Again')?></a>
+        </div>
+        <?php endif;?>
+    </div><!-- /content -->
+</div><!-- /page -->
+
+<style type="text/css">
+    .break {
+        -ms-word-break: break-all;
+        word-break: break-all;
+        // Non standard for webkit
+        word-break: break-word;
+        -webkit-hyphens: auto;
+        -moz-hyphens: auto;
+        hyphens: auto;
+    }
+</style>

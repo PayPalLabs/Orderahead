@@ -1,0 +1,26 @@
+<?xml version="1.0"?> 
+<layout version="0.1.0">
+    <jsoncheckout_cart_template>
+        <reference name="content">
+            <block type="core/template" name="cart_template" as="cart_template" template="checkout/cart.phtml" />
+        </reference>
+    </jsoncheckout_cart_template>
+    
+    <jsoncheckout_cart_index>
+        <reference name="content">
+            <block type="paypal_checkout/json_cart" output="toHtml" name="cart_index"   />
+        </reference>
+    </jsoncheckout_cart_index>
+    <jsoncheckout_onepage_success>
+        <reference name="content">
+            <block type="paypal_checkout/json_success" output="toHtml" name="checkout_success"/>
+        </reference>
+    </jsoncheckout_onepage_success>
+    
+    <jsoncheckout_onepage_successtemplate>
+        <reference name="content">
+            <block type="core/template" name="success_template" as="success_template" template="checkout/onepage.phtml" />
+        </reference>
+    </jsoncheckout_onepage_successtemplate>
+
+</layout>

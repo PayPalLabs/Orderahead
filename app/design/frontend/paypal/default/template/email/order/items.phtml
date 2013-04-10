@@ -1,0 +1,24 @@
+<table style="table-layout: variable;">
+		<?php
+			foreach($this->getData('order')->getAllVisibleItems() as $product=>$item){
+		?>
+		<tr>
+			<td style="word-wrap: break-word;text-align: left;">
+				<span style="display: block;"><b>Qty : <?php echo $item->getQtyToShip()*1?></b></span>
+				<span style="display: block;">Price : <?php echo $this->getData('order')->formatPrice($item->getRowTotal())?></span>
+				<span style="display: block;"><?php echo (Mage::helper('paypal_checkin')->getProductOptions($item)=='') ? ('<b>'.$item->getName().'</b>') : ('<b>'.$item->getName().'</b> - '.Mage::helper('paypal_checkin')->getProductOptions($item));?></span>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+		<?php 
+			}
+		?>
+		<tr>
+			<td style="word-wrap: break-word;text-align: left;">
+				<span style="display: block;">Discount : <?php echo ($this->getData('order')->getDiscountAmount() > 0) ? $this->getData('order')->formatPrice(0.00 - $this->getData('order')->getDiscountAmount()) : $this->getData('order')->formatPrice(0.00)?></span>
+				<span style="display: block;"><b>Grand Total : <?php echo $this->getData('order')->formatPrice($this->getData('order')->getGrandTotal())?></b></span>
+			</td>
+		</tr>
+	</table>

@@ -1,0 +1,43 @@
+<?php
+/**
+ * PayPal Checkout
+ *
+ * @package      :  PayPal_Checkout
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<?php $sid = rand(); ?>
+<!--
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl() ?>css/flexslider.css" type="text/css" media="screen" />
+<script defer src="<?php echo $this->getSkinUrl() ?>js/jquery.flexslider-min.js"></script>
+-->	
+<div class="home-content-box">
+
+	<div class="banner-box">
+		 <section class="slider">
+		   <div id="flexslider_<?php echo $sid; ?>" class="flexslider carousel">
+		   		<ul class="slides" id="banner_<?php echo $sid; ?>"></ul>
+		  </div>
+		 </section>	
+	</div>
+
+	<div class="homepage-box">	 	
+		<div id="homepage-links_<?php echo $sid; ?>"></div>				
+		<div id="feature-categories_<?php echo $sid; ?>" style="width:100%"></div>
+	</div>
+	
+</div>
+
+
+
+<script>
+  selectNav(0);
+  getHomepageFeaturedJSON("<?php echo $sid; ?>");
+  getHomepageJSON("<?php echo $sid; ?>");		
+</script>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <jsoncheckout_onepage_success>
+        <reference name="checkout_success">
+            <block type="paypal_qrcodeorder/json_qrcode" output="toHtml" name="qrcode"/>
+        </reference>
+    </jsoncheckout_onepage_success>
+    <paypalsales_order_details>
+        <reference name="content">
+            <block type="paypal_qrcodeorder/json_qrcode" output="toHtml" name="qrcode"/>
+        </reference>
+    </paypalsales_order_details>
+</layout>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout_onepage_success>
+        <reference name="content">
+            <block type="paypal_qrcodeorder/qrcode" name="qrcode" template="paypal/qrcodeorder/qrcode.phtml"/>
+        </reference>
+    </checkout_onepage_success>
+</layout>

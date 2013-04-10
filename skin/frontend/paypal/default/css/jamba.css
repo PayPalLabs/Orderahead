@@ -1,0 +1,338 @@
+body {
+        color: #000;
+        background-color: #f1ece8;
+        /*background-color: none;
+        background-image: url(../images/linen_bg.png) ;
+        background-repeat: repeat; 
+        background-attachment:fixed;*/
+
+}
+
+.data-role, .product-info-box {
+        background-color: #f1ece8;
+        /*background-image: url(../images/linen_bg.png) ;
+        background-repeat: repeat; 
+        background-attachment:fixed;*/
+}
+
+
+
+#nav, .product-box-container {
+        /*background-color: none;
+        background:transparent;*/
+        background-color: #f1ece8;
+}
+
+#category-scroll {
+        /*background-color: none;
+        background:transparent;*/
+        background-color: #f1ece8;
+}
+
+
+.banner-box, .homepage-box {
+        /*background-image: url(../images/linen_bg.png) ;
+        background-repeat: repeat; 
+        background-attachment:fixed;*/
+        background-color: #f1ece8;
+}
+
+
+.data-role, .ctimetext, .recentorderitem-row, .productlist-title a {
+	color:#000;
+}
+
+#menu-bar {
+background: #4c4038; /* Old browsers */
+background: -moz-linear-gradient(top,  #4c4038 0%, #4c4038 95%, #3b322c 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#4c4038), color-stop(95%,#4c4038), color-stop(100%,#3b322c)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #4c4038 0%,#4c4038 95%,#3b322c 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #4c4038 0%,#4c4038 95%,#3b322c 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #4c4038 0%,#4c4038 95%,#3b322c 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #4c4038 0%,#4c4038 95%,#3b322c 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4038', endColorstr='#3b322c',GradientType=0 ); /* IE6-9 */	
+}
+
+.menu-bar-item {
+	border-right:1px solid #615248;
+}
+
+.menu-bar-item.selected {
+background: #3f352f; /* Old browsers */
+background: -moz-linear-gradient(top,  #3f352f 0%, #4c4038 7%, #3c322c 65%, #2f231b 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3f352f), color-stop(7%,#4c4038), color-stop(65%,#3c322c), color-stop(100%,#2f231b)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(top,  #3f352f 0%,#4c4038 7%,#3c322c 65%,#2f231b 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(top,  #3f352f 0%,#4c4038 7%,#3c322c 65%,#2f231b 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(top,  #3f352f 0%,#4c4038 7%,#3c322c 65%,#2f231b 100%); /* IE10+ */
+background: linear-gradient(to bottom,  #3f352f 0%,#4c4038 7%,#3c322c 65%,#2f231b 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f352f', endColorstr='#2f231b',GradientType=0 ); /* IE6-9 */
+	color: #e98f3a;
+	text-shadow: 0px -1px 0px #574940;
+}
+
+#menuNav_3.selected {
+	padding-right:20px;
+}
+
+.menu-bar-divider {
+	border-left:1px solid #352c26;
+}
+
+.homelink-arrow {
+	background-image: url('../images/ico-jamba-arrow-right.png');
+}
+
+.content-box {
+	background:transparent;
+}
+
+.product-topprice, .product-qty {
+	color: #666666;
+}
+
+.productlist-title {
+	background-color: #f1ece8;
+}
+
+.productlist-title {
+	background: url('../images/ico-jamba-arrow-left.png') no-repeat 5px center;
+}
+.accordion li {
+	background: #f5f0ed;
+	border-bottom: 1px solid #dddad9;
+}
+
+.accordion li a {
+	color: #e98f3a;
+}
+
+.accordion li ul li {
+	background: #e98f3a;
+	border-top: 1px solid #f0a260;
+	border-bottom: 1px solid #d6823c;
+}
+
+.accordion li ul li a {
+	text-shadow: 0px 0px 0px #212932;
+}
+
+.product-title {
+	color: #e78e44;
+}
+
+.product-list li {
+	background: #ffffff url('../images/ico-jamba-arrow-right.png') no-repeat right center;
+}
+
+.product-description {
+	color: #000;
+}
+
+.product-detail-title {
+	color: #e78e44;
+}
+
+.product-detail-title a {
+	color: #e78e44;
+}
+
+.product-detail-description {
+	color: #000;
+}
+
+.save-favorites {
+	color: #000;
+}
+
+.product-box-shadow {
+	border: 1px solid #a9a9ac;
+	background: #f6f5f5;
+}
+
+.product-option-row1 {
+	color: #000;
+	border-bottom: 1px solid #a9a9ac;
+	background: #ced2da;
+	background: -moz-linear-gradient(top, #f2efec 0%, #e3deda 50%, #d6d0c9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2efec), color-stop(50%,#e3deda), color-stop(100%,#d6d0c9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2efec', endColorstr='#d6d0c9',GradientType=0 ); /* IE6-9 */
+}
+
+.product-option-item {
+	color: #000;
+	border: 2px solid #a9a9ac;
+	background: #ced2da;
+	background: -moz-linear-gradient(top, #f2efec 0%, #e3deda 50%, #d6d0c9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2efec), color-stop(50%,#e3deda), color-stop(100%,#d6d0c9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2efec', endColorstr='#d6d0c9',GradientType=0 ); /* IE6-9 */
+}
+
+.product-box-input, .homepage-link-box {
+	border: 2px solid #dfd2c8;
+}
+
+.qtyselect .ui-btn {
+	margin:0;
+}
+
+.product-input-left input, .product-input-left select {
+	color: #000;
+}
+
+/*.homepage-btn {
+	background-color: #e2e2e2;
+}*/
+
+.text-title {
+	color:#e78e44;
+	text-shadow: 0 -1px 0 #ffffff;
+	font-size: 24px;
+	font-weight: bold;
+}
+
+.ui-radio label {
+	/*text-shadow: 0 -1px 0 #8b5c00;*/
+	color: #666666;
+	font-weight:normal;
+	border: 1px solid #b6b4b4;
+	background: #f5c869;
+	background: -moz-linear-gradient(top, #f6f5f5 0%, #e5dfdb 50%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f6f5f5), color-stop(50%,#e5dfdb)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #f6f5f5 0%, #e5dfdb 50%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #f6f5f5 0%, #e5dfdb 50%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #f6f5f5 0%, #e5dfdb 50%); /* IE10+ */
+	background: linear-gradient(to bottom, #f6f5f5 0%, #e5dfdb 50%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f6f5f5', endColorstr='#e5dfdb',GradientType=0 ); /* IE6-9 */
+}
+
+
+.ui-radio label.ui-radio-on {
+	/*text-shadow: 0 -1px 0 #8b5c00;*/
+	color: #e78e44;
+	font-weight:normal;
+	border: 1px solid #b6b4b4;
+	background: #f5c869;
+	background: -moz-linear-gradient(top, #e5dfdb 0%, #f6f5f5 50%)  !important; /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e5dfdb), color-stop(50%,#f6f5f5))  !important; /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #e5dfdb 0%, #f6f5f5 50%) !important; /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #e5dfdb 0%, #f6f5f5 50%) !important; /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #e5dfdb 0%, #f6f5f5 50%) !important; /* IE10+ */
+	background: linear-gradient(to bottom, #e5dfdb 0%, #f6f5f5 50%) !important; /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e5dfdb', endColorstr='#f6f5f5',GradientType=0 ) !important; /* IE6-9 */
+}
+
+.ui-checkbox label:last-child {
+	border-bottom: 0;
+}
+
+.ui-checkbox label {
+	/*text-shadow: 0 -1px 0 #8b5c00;*/
+	color: #666666;
+	font-weight:normal;
+	/*border: 1px solid #b6b4b4;*/
+	border:0px;	
+	background: #f6f5f5 url('../images/form-jamba-checkbox.png') no-repeat left center;
+	border-bottom: 1px solid #e2e2e2 !important;
+}
+
+
+.ui-checkbox label.ui-checkbox-on {
+	color: #e78e44;
+	border-bottom: 1px solid #e2e2e2;
+	background: #f6f5f5 url('../images/form-jamba-checkbox.png') no-repeat -2976px center !important;
+}
+
+.box-shadow {
+	background: #f5f4f2;
+}
+.whitebg {
+	background: #fff;
+}
+.product-option-row2 {
+	color:#666666;
+}
+.product-option-chk-row2 {
+	float:left;
+	padding: 3% 2%;
+	width: 96%;
+	font-size: 19px;
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+.cart-row1, .cvalue1, .cvalue2, .currencycd {
+	color: #e78e44;
+}
+
+.currencycd_dark {
+	color: #3b1f08;
+}
+
+#cart-staticblock { 
+	color: #000;
+}
+
+.saved-fav {
+	background: url('../images/ico-favorite-saved-orange.png') no-repeat left center;
+	color: #e78e44;
+}
+
+.cart-row1 a {
+	color: #e78e44;
+}
+
+.cart-row2, .cart-row3, .sectionbox-row2, .total-row, .jamba-right, qr-row1, .qr-row2, .product-qty-label, .product-price-label {
+	color: #000;
+}
+
+.cart-total-amount, .item-amount, .product-price, #finalpricebox {
+	color: #e78e44;
+	text-shadow: 0 -1px 0 #ffffff;
+}
+
+.item-amount {
+	padding-top:4px;
+}
+
+.defpricebox {
+	color: #666666;
+}
+
+.recentorder-row2{
+	color: #ffffff;
+}
+
+.sectionbox-row1-text {
+	color: #000;
+	border-bottom: 1px solid #a9a9ac;
+	background: #ced2da;
+	background: -moz-linear-gradient(top, #f2efec 0%, #e3deda 50%, #d6d0c9 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f2efec), color-stop(50%,#e3deda), color-stop(100%,#d6d0c9)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* IE10+ */
+	background: linear-gradient(to bottom, #f2efec 0%,#e3deda 50%,#d6d0c9 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f2efec', endColorstr='#d6d0c9',GradientType=0 ); /* IE6-9 */
+}
+
+input.ui-input-text, input.ui-input-arrow {
+	border: 2px solid #e5dacf;
+	color: #e78e44;
+	text-shadow: 0 -1px 0 #8b5c00;
+}
+
+#store-location-container a {
+	color: #000;
+}
+
+.bluetext {
+	color: #e78e44;
+}

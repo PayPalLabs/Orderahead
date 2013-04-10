@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <paypalfavorite_index_view>
+        <reference name="content">
+            <block type="paypal_favorite/json_favorite" output="toHtml" name="product_list"/>
+        </reference>
+    </paypalfavorite_index_view>
+    <paypalfavorite_index_viewtemplate>
+        <reference name="content">
+            <block type="core/template" name="customer_favorite_template" template="favorite/view.phtml" />
+        </reference>
+    </paypalfavorite_index_viewtemplate>
+    <jsoncatalog_product_view>
+        <reference name="product_info">
+            <block type="paypal_favorite/json_productstatus" name="favorite" output="toHtml"/>
+        </reference>
+    </jsoncatalog_product_view>
+    <paypalfavorite_index_add>
+        <reference name="content">
+            <block type="paypal_favorite/json_add" output="toHtml" name="success"/>
+        </reference>
+    </paypalfavorite_index_add>
+    <paypalfavorite_index_delete>
+        <reference name="content">
+            <block type="paypal_favorite/json_delete" output="toHtml" name="success"/>
+        </reference>
+    </paypalfavorite_index_delete>
+</layout>

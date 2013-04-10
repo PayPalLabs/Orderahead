@@ -1,0 +1,25 @@
+<?php
+/**
+ * PayPal Index Page
+ *
+ * @package      :  
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<title><?php echo $this->getTitle() ?></title>
+<meta name="description" content="<?php echo htmlspecialchars($this->getDescription()) ?>" />
+<meta name="keywords" content="<?php echo htmlspecialchars($this->getKeywords()) ?>" />
+<meta name="robots" content="<?php echo htmlspecialchars($this->getRobots()) ?>" />
+<link rel="icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<link rel="shortcut icon" href="<?php echo $this->getFaviconFile(); ?>" type="image/x-icon" />
+<?php echo $this->getChildHtml('cdn_js_jquery'); ?>
+<?php echo $this->getChildHtml('cdn_js_jquerymobile'); ?>
+<?php echo $this->getChildHtml('cdn_css_jquerymobile'); ?>
+<?php echo $this->getCssJsHtml() ?>
+<?php echo $this->getIncludes() ?>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Paypal_Catalog>
+            <version>0.9.0</version>
+        </Paypal_Catalog>
+    </modules>
+    <global>
+        <helpers>
+            <paypal_catalog>
+                <class>Paypal_Catalog_Helper</class>
+            </paypal_catalog>
+        </helpers>
+        <blocks>
+            <paypal_catalog>
+                <class>Paypal_Catalog_Block</class>
+            </paypal_catalog>
+        </blocks>
+    </global>
+    <frontend>
+        <routers>
+            <jsoncatalog>
+                <use>standard</use>
+                <args>
+                    <module>Paypal_Catalog</module>
+                    <frontName>jsoncatalog</frontName>
+                </args>
+            </jsoncatalog>
+        </routers>
+    </frontend>
+    <adminhtml>
+    </adminhtml>
+    <admin>
+    </admin>
+</config>

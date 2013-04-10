@@ -1,0 +1,44 @@
+<?php
+/**
+ * PayPal Index Page
+ *
+ * @package      :  
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<?php
+extract($_GET, EXTR_PREFIX_ALL, 'rq_');
+extract($_POST, EXTR_PREFIX_ALL, 'rq_');
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html dir="ltr" lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv="CACHE-CONTROL" content="NO-CACHE" />
+        <meta http-equiv="PRAGMA" content="NO-CACHE" />
+        <meta http-equiv="EXPIRES" content="Mon, 14 Jan 1980 00:00:01 GMT" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />            
+        <?php echo $this->getChildHtml('header') ?>
+    </head>
+        
+    <body>
+        <script>
+            var storeRootUrl='<?php echo Mage::app()->getStore()->getBaseUrl(); ?>';
+            window.document.title = '<?php echo Mage::app()->getStore()->getName(); ?>'
+        </script>
+        <div id="wrapper">
+            <?php echo $this->getChildHtml('navigation'); ?>
+            <div data-role="page" class="data-role">
+                <?php echo $this->getChildHtml('content'); ?>                
+            </div>
+                
+        </div>           
+        <?php echo $this->getChildHtml('footer'); ?>
+    </body>
+</html>

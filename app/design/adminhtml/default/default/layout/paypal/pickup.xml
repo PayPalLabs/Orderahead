@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_place_index>
+        <reference name="content">
+            <block type="paypal_pickup/adminhtml_place" name="vendors"/>
+        </reference>
+    </adminhtml_place_index>
+    <adminhtml_place_edit>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>paypal/pickup.css</name>
+            </action>
+        </reference>
+    </adminhtml_place_edit>
+    <adminhtml_sales_order_view>
+        <reference name="head">
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>paypal/pickup.css</name>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+</layout>

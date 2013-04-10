@@ -1,0 +1,236 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <adminhtml_index_login>
+
+    </adminhtml_index_login>
+    <adminhtml_instorepickupadmin_order_login>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>paypal/instorepickupadmin/page.phtml</template>
+            </action>
+            <remove name="head"/>
+            <block type="adminhtml/page_head" name="page_head">
+                <action method="setTemplate">
+                    <template>paypal/instorepickupadmin/page/head.phtml</template>
+                </action>
+                <action method="setTitle" translate="title">
+                    <title>Login</title>
+                </action>
+                <action method="addItem">
+                    <type>js_css</type>
+                    <name>paypal/instorepickup/style.css</name>
+                </action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/jquery.validate.js</script>
+                </action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/app.js</script>
+                </action>
+            </block>
+            <block type="core/text_list" name="main">
+                <block type="paypal_instorepickupadmin/adminhtml_page_login" name="section_login" template="paypal/instorepickupadmin/page/login.phtml">
+                    <block type="paypal_instorepickupadmin/adminhtml_page_toolbar" name="toolbar" template="paypal/instorepickupadmin/page/toolbar.phtml"/>
+                    <block type="core/text_list" name="global_message">
+                        <block type="paypal_instorepickupadmin/adminhtml_page_messages" name="messages" as="messages"/>
+                    </block>
+                </block>
+            </block>
+            <reference name="js">
+                <block type="paypal_instorepickupadmin/adminhtml_page_js" name="app_js" template="paypal/instorepickupadmin/page/js.phtml"/>
+            </reference>
+        </reference>
+    </adminhtml_instorepickupadmin_order_login>
+
+    <adminhtml_instorepickupadmin_order_search>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>paypal/instorepickupadmin/page.phtml</template>
+            </action>
+            <remove name="head"/>
+            <block type="adminhtml/page_head" name="page_head">
+                <action method="setTemplate">
+                    <template>paypal/instorepickupadmin/page/head.phtml</template>
+                </action>
+                <action method="setTitle" translate="title">
+                    <title>Order Management</title>
+                </action>
+                <action method="addItem"><type>js_css</type><name>paypal/instorepickup/style.css</name></action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/jquery.validate.js</script>
+                </action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/app.js</script>
+                </action>
+            </block>
+            <block type="core/text_list" name="main">
+                <block type="paypal_instorepickupadmin/adminhtml_sales_order_search" name="section_search_order" template="paypal/instorepickupadmin/sales/order/search.phtml">
+                    <block type="paypal_instorepickupadmin/adminhtml_page_toolbar" name="toolbar" template="paypal/instorepickupadmin/page/toolbar.phtml">
+                        <action method="setTitle"><title>Search Order</title></action>
+                        <action method="setIsShowHomeButton"><isshow>0</isshow></action>
+                    </block>
+                    <block type="core/text_list" name="global_message">
+                        <block type="paypal_instorepickupadmin/adminhtml_page_messages" name="messages" as="messages"/>
+                    </block>
+                </block>
+            </block>
+            <reference name="js">
+                <block type="paypal_instorepickupadmin/adminhtml_page_js" name="app_js" template="paypal/instorepickupadmin/page/js.phtml"/>
+            </reference>
+        </reference>
+    </adminhtml_instorepickupadmin_order_search>
+
+    <adminhtml_instorepickupadmin_order_denied>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>paypal/instorepickupadmin/page.phtml</template>
+            </action>
+            <remove name="head"/>
+            <block type="adminhtml/page_head" name="page_head">
+                <action method="setTemplate">
+                    <template>paypal/instorepickupadmin/page/head.phtml</template>
+                </action>
+                <action method="setTitle" translate="title">
+                    <title>Order Management</title>
+                </action>
+                <action method="addItem"><type>js_css</type><name>paypal/instorepickup/style.css</name></action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/jquery.validate.js</script>
+                </action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/app.js</script>
+                </action>
+            </block>
+            <block type="core/text_list" name="main">
+                <block type="paypal_instorepickupadmin/adminhtml_section" name="section_search_order" template="paypal/instorepickupadmin/page/denied.phtml">
+                    <block type="paypal_instorepickupadmin/adminhtml_page_toolbar" name="toolbar" template="paypal/instorepickupadmin/page/toolbar.phtml">
+                        <action method="setTitle"><title>Access denied</title></action>
+                        <action method="setIsShowHomeButton"><isshow>0</isshow></action>
+                    </block>
+                    <block type="core/text_list" name="global_message">
+                        <block type="paypal_instorepickupadmin/adminhtml_page_messages" name="messages" as="messages"/>
+                    </block>
+                </block>
+            </block>
+            <reference name="js">
+                <block type="paypal_instorepickupadmin/adminhtml_page_js" name="app_js" template="paypal/instorepickupadmin/page/js.phtml"/>
+            </reference>
+        </reference>
+    </adminhtml_instorepickupadmin_order_denied>
+
+    <adminhtml_instorepickupadmin_order_index>
+        <update handle="adminhtml_instorepickupadmin_order_search"/>
+    </adminhtml_instorepickupadmin_order_index>
+
+
+
+    <adminhtml_instorepickupadmin_order_searchresult>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>paypal/instorepickupadmin/page.phtml</template>
+            </action>
+            <remove name="head"/>
+            <block type="adminhtml/page_head" name="page_head">
+                <action method="setTemplate">
+                    <template>paypal/instorepickupadmin/page/head.phtml</template>
+                </action>
+                <action method="setTitle" translate="title">
+                    <title>Order Management</title>
+                </action>
+                <action method="addItem"><type>js_css</type><name>paypal/instorepickup/style.css</name></action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/jquery.validate.js</script>
+                </action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/app.js</script>
+                </action>
+            </block>
+
+            <block type="core/text_list" name="main">
+                <block type="paypal_instorepickupadmin/adminhtml_sales_order_searchresult" name="section_search_order_result" template="paypal/instorepickupadmin/sales/order/list.phtml">
+                    <block type="paypal_instorepickupadmin/adminhtml_page_toolbar" name="toolbar" template="paypal/instorepickupadmin/page/toolbar.phtml">
+
+                    </block>
+                    <block type="core/text_list" name="footer">
+                        <block type="paypal_instorepickupadmin/adminhtml_page_messages" name="messages" as="messages"/>
+                    </block>
+                </block>
+            </block>
+            <reference name="js">
+                <block type="paypal_instorepickupadmin/adminhtml_page_js" name="app_js" template="paypal/instorepickupadmin/page/js.phtml"/>
+            </reference>
+        </reference>
+    </adminhtml_instorepickupadmin_order_searchresult>
+    <adminhtml_instorepickupadmin_order_detail>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>paypal/instorepickupadmin/page.phtml</template>
+            </action>
+            <remove name="head"/>
+            <block type="adminhtml/page_head" name="page_head">
+                <action method="setTemplate">
+                    <template>paypal/instorepickupadmin/page/head.phtml</template>
+                </action>
+                <action method="setTitle" translate="title">
+                    <title>Order Detail</title>
+                </action>
+                <action method="addItem"><type>js_css</type><name>paypal/instorepickup/style.css</name></action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/jquery.validate.js</script>
+                </action>
+                <action method="addJs">
+                    <script>paypal/instorepickup/app.js</script>
+                </action>
+            </block>
+            <block type="core/text_list" name="main">
+                <block type="paypal_instorepickupadmin/adminhtml_sales_order_detail" name="section_sales_order_detail"
+                       template="paypal/instorepickupadmin/sales/order/detail.phtml">
+                    <block type="paypal_instorepickupadmin/adminhtml_page_toolbar" name="toolbar" template="paypal/instorepickupadmin/page/toolbar.phtml">
+                        <action method="setTitle"><title>Order</title></action>
+                    </block>
+                    <block type="paypal_instorepickupadmin/adminhtml_sales_order_detail_items" name="order_items"
+                           template="paypal/instorepickupadmin/sales/order/detail/items.phtml">
+                        <action method="addItemRender">
+                            <type>default_mobile</type>
+                            <block>paypal_instorepickupadmin/adminhtml_sales_order_detail_items_renderer_default</block>
+                            <template>paypal/instorepickupadmin/sales/order/detail/items/default.phtml</template>
+                        </action>
+                        <action method="addItemRender">
+                            <type>bundle_mobile</type>
+                            <block>paypal_instorepickupadmin/adminhtml_sales_order_detail_items_renderer_bundle</block>
+                            <template>paypal/instorepickupadmin/sales/order/detail/items/bundle.phtml</template>
+                        </action>
+                        <action method="addColumnRender">
+                            <column>qty</column>
+                            <block>adminhtml/sales_items_column_qty</block>
+                            <template>paypal/instorepickupadmin/sales/order/detail/items/column/qty.phtml</template>
+                        </action>
+                        <action method="addColumnRender">
+                            <column>name</column>
+                            <block>adminhtml/sales_items_column_name</block>
+                            <template>paypal/instorepickupadmin/sales/order/detail/items/column/name.phtml</template>
+                        </action>
+                    </block>
+                    <block type="paypal_instorepickupadmin/adminhtml_sales_order_detail_history" name="order_history"
+                           template="paypal/instorepickupadmin/sales/order/detail/history.phtml"/>
+                    <block type="core/text_list" name="global_message">
+                        <block type="paypal_instorepickupadmin/adminhtml_page_messages" name="messages" as="messages"/>
+                    </block>
+                </block>
+            </block>
+            <reference name="js">
+                <block type="paypal_instorepickupadmin/adminhtml_page_js" name="app_js" template="paypal/instorepickupadmin/page/js.phtml"/>
+            </reference>
+        </reference>
+    </adminhtml_instorepickupadmin_order_detail>
+
+    <adminhtml_sales_order_view>
+        <reference name="order_history">
+            <action method="setTemplate"><template>paypal/instorepickupadmin/sales/order/view/history.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_view>
+    <adminhtml_sales_order_addcomment>
+        <reference name="order_history">
+            <action method="setTemplate"><template>paypal/instorepickupadmin/sales/order/view/history.phtml</template></action>
+        </reference>
+    </adminhtml_sales_order_addcomment>
+</layout>

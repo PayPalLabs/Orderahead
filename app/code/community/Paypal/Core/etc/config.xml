@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Paypal_Core>
+            <version>0.9.0</version>
+        </Paypal_Core>
+    </modules>
+    <global>
+        <models>
+            <paypal_core>
+                <class>Paypal_Core_Model</class>
+            </paypal_core>
+        </models>
+        <helpers>
+            <paypal_core>
+                <class>Paypal_Core_Helper</class>
+            </paypal_core>
+        </helpers>
+        <blocks>
+            <paypal_core>
+                <class>Paypal_Core_Block</class>
+            </paypal_core>
+        </blocks>
+    </global>
+</config>

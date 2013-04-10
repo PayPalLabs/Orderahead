@@ -1,0 +1,35 @@
+<div data-role="page">
+    <div data-role="content">
+        <?php echo $this->getChildHtml('global_message')?>
+        <img style="margin:20px auto;display: block;" src="<?php echo $this->helper('paypal_instorepickupadmin')->getLogoUrl() ?>" alt="<?php echo $this->__('Magento Logo') ?>" class="logo"/>
+        <form class="roundeds" name="form-login" id="form-login" onsubmit="return loginFormSubmit(this)" method="post" data-ajax="false">
+            <fieldset>
+                <label><?php echo $this->__('User Name')?></label><br/>
+                <input type="text" value="" id="txt-login-name" name="login[username]" class="required"/>
+            </fieldset>
+            <fieldset>
+                <label><?php echo $this->__('Password')?></label><br/>
+                <input type="password" value="" id="txt-login-password" name="login[password]" class="required"/>
+            </fieldset>
+            <input type="hidden" name="form_key" value="<?php echo $this->getFormKey(); ?>" />
+            <fieldset>
+                <div data-role="controlgroup">
+                    <input type="submit" value="<?php echo $this->__('Login')?>"  data-theme="e">
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+</div>
+<script type="text/javascript">
+    function loginFormSubmit(sender){
+        if($('#txt-login-name').val() == '' || $('#txt-login-password').val() == ''){
+            alert('<?php echo $this->__('Username and password are required')?>');
+            return false;
+        }
+        else{
+            sender.submit();
+            return true;
+        }
+    }
+</script>

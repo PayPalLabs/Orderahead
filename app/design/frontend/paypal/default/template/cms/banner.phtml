@@ -1,0 +1,38 @@
+<?php $sid = rand(); ?>
+<html>
+<script>
+function initBanner() {
+	getHomepageJSON("<?php echo $sid; ?>");        
+}
+
+function initFlex() {
+	$('.flexslider').flexslider({
+		animation: "slide",
+		animationLoop: false,
+		itemWidth: 150,
+		itemMargin: 5,
+		start: function(slider){
+			$('body').removeClass('loading');
+		}
+	});
+}
+</script>
+
+<body onload="setTimeout('initBanner()',0);" style="background-color:#e4e1da">
+
+ <section class="slider">
+   <div class="flexslider carousel">
+   		<ul class="slides" id="banner_<?php echo $sid; ?>"></ul>
+  </div>
+ </section>
+
+<!-- FlexSlider -->
+
+
+<script type="text/javascript">
+
+  
+</script>
+
+</body>
+</html>

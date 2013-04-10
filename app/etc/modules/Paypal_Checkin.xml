@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Paypal_Checkin>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Paypal_Checkin>
+    </modules>
+</config> 

@@ -1,0 +1,130 @@
+<?php
+/**
+ * PayPal Checkout
+ *
+ * @package      :  PayPal_Checkout
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<!DOCTYPE html>
+<?php $storemap_params = $this->getRequest()->getParams(); ?>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Map</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+            var storeRootUrl='<?php echo Mage::app()->getStore()->getBaseUrl(); ?>';
+            function initialize() {
+                
+                var lat;
+                var lot;
+                var MaptplHTML;
+                
+                // get json
+                $.getJSON(storeRootUrl + "/locationhere/onepage/storemap/order_id/" + <?php echo $storemap_params['order_id'] ?>, function(jsonObj) {
+                    var dataObj = jsonObj.storemap;
+                    lat = dataObj.latitude;
+                    lot = dataObj.longtitude;
+                    //alert(lat +' '+lot); 
+                    var MaptplHTML = $("#StoreMapTemplate").html();		
+                    var storeObj = jsonObj.storemap;
+                    for (key in storeObj) {	
+                        if(key == "logo") {
+                            var reimg = new RegExp("%"+key+"%", "g");
+                            MaptplHTML = MaptplHTML.replace(reimg,'<img src="'+storeObj[key]+'" width="50px">');
+                        } else {
+                            var re1 = new RegExp("%"+key+"%", "g");
+                            MaptplHTML = MaptplHTML.replace(re1,storeObj[key]);
+                        }
+                    }			
+                    //alert(MaptplHTML); 
+                    
+                    var myLatlng = new google.maps.LatLng( lat, lot );
+                    
+                    lat2 = Number(lat) + Number(0.0025);
+                    lot2 = Number(lot) + Number(0.0011);
+                    //alert(lat2 +' '+lot2);
+                    var centerlng = new google.maps.LatLng( lat2, lot2 );
+                    
+                    var myOptions = {
+                        zoom: 16,
+                        center: centerlng,
+                        disableDefaultUI:true,   
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    }
+                    
+                    var map = new google.maps.Map( document.getElementById( "map_canvas" ), myOptions );
+                    var marker=new google.maps.Marker({ position:myLatlng });
+                    marker.setMap(map);
+                    
+                    var infowindow = new google.maps.InfoWindow({
+                        content:MaptplHTML
+                    });
+                    infowindow.open(map,marker);
+                    
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infowindow.open(map,marker);
+                    });
+                    
+                });  
+            }
+            
+        </script>
+            
+        <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+        <style>
+            html {
+                height: 100%;
+                overflow: hidden;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+                height: 100%;
+            }
+            #map_canvas { 
+                height: 100%;
+            }   
+            #jamba-container {
+                    font-size:14px;
+                    text-shadow: 0 1px 0 #fff;
+            } 
+            .jamba-left {
+                            float:left;
+                            width:35%;
+                    }
+                    .jamba-right {
+                            float:right;
+                            width:65%;
+                    }
+        </style>
+    </head>
+    <body onload="initialize()">
+        
+        <div id="map_canvas"></div>
+            
+        <div id="templates">
+            
+            <!-- Store Map Template -->
+            <div id="StoreMapTemplate">	
+                <div id="jamba-container">
+                    <div class="jamba-left">%logo%</div>
+                    <div class="jamba-right">
+                        <div class="cvalue">%name%</div>
+                        <div class="clabel2">%address%</div>
+                        <div class="clabel3">%phonenum%</div>
+                    </div>
+                </div>
+            </div>
+                
+        </div>
+            
+    </body>
+</html>

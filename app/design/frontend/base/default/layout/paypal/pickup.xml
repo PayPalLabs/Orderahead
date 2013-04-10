@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <checkout_onepage_index>
+        <reference name="checkout.onepage.shipping_method.available">
+            <action method="setTemplate">
+                <template>paypal/pickup/checkout/onepage/shipping_method/available.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_index>
+    <checkout_onepage_shippingmethod>
+        <reference name="root">
+            <action method="setTemplate">
+                <template>paypal/pickup/checkout/onepage/shipping_method/available.phtml</template>
+            </action>
+        </reference>
+    </checkout_onepage_shippingmethod>
+    <paypal_express_review>
+        <reference name="head">
+            <action method="addJs">
+                <script>paypal/pickup/express.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>paypal/pickup/css/pickup.css</name>
+            </action>
+            <block type="core/template" template="paypal/pickup/js.phtml"/>
+        </reference>
+    </paypal_express_review>
+    <checkout_onepage_index>
+        <reference name="head">
+            <action method="addJs">
+                <script>paypal/pickup/instore.js</script>
+            </action>
+            <action method="addItem">
+                <type>skin_css</type>
+                <name>paypal/pickup/css/pickup.css</name>
+            </action>
+            <block type="core/template" template="paypal/pickup/js.phtml"/>
+        </reference>
+    </checkout_onepage_index>
+</layout>

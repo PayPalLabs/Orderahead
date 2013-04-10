@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<layout version="0.1.0">
+        <paypal_featuredcategory_product_list>
+        	<reference name="content">  
+                <block type="paypal_featuredcategory/json_category_list" output="toHtml" name="featured_category_list"/>
+            </reference>
+        </paypal_featuredcategory_product_list>
+</layout>

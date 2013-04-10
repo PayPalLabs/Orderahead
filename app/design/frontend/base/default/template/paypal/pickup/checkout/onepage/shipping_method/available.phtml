@@ -1,0 +1,181 @@
+<?php
+/**
+ * Pickup
+ *
+ * @package      :  Paypal_Pickup
+ * @version      :  0.1.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  01/03/2013
+ *
+ */
+?>
+<?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
+<p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
+<?php else: ?>
+<dl class="sp-methods">
+    <?php $shippingCodePrice = array(); ?>
+    <?php $_sole = count($_shippingRateGroups) == 1; foreach ($_shippingRateGroups as $code => $_rates): ?>
+    <dt><?php echo $this->getCarrierName($code) ?></dt>
+    <dd>
+        <ul>
+            <?php $_sole = $_sole && count($_rates) == 1; foreach ($_rates as $_rate): ?>
+            <?php $shippingCodePrice[] = "'" . $_rate->getCode() . "':" . (float)$_rate->getPrice(); ?>
+            <?php if ($code != 'instore'): ?>
+                <li>
+                    <?php if ($_rate->getErrorMessage()): ?>
+                    <ul class="messages">
+                        <li class="error-msg">
+                            <ul>
+                                <li><?php echo $_rate->getErrorMessage() ?></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <?php else: ?>
+                    <?php if ($_sole) : ?>
+                        <span class="no-display"><input name="shipping_method" type="radio"
+                                                        value="<?php echo $_rate->getCode() ?>"
+                                                        id="s_method_<?php echo $_rate->getCode() ?>"
+                                                        checked="checked"/></span>
+                        <?php else: ?>
+                        <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>"
+                               id="s_method_<?php echo $_rate->getCode() ?>"<?php if ($_rate->getCode() === $this->getAddressShippingMethod()) echo ' checked="checked"' ?>
+                               class="radio"/>
+
+                        <?php if ($_rate->getCode() === $this->getAddressShippingMethod()): ?>
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                lastPrice = <?php echo (float)$_rate->getPrice(); ?>;
+                                //]]>
+                            </script>
+                            <?php endif; ?>
+
+                        <?php endif; ?>
+                    <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $_rate->getMethodTitle() ?>
+                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                            <?php endif; ?>
+                    </label>
+                    <?php endif ?>
+                </li>
+                <?php else: ?>
+                <li>
+                    <?php if ($_rate->getErrorMessage()): ?>
+                    <ul class="messages">
+                        <li class="error-msg">
+                            <ul>
+                                <li><?php echo $_rate->getErrorMessage() ?></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <?php else: ?>
+                    <?php if ($_sole) : ?>
+                        <span class="no-display"><input name="shipping_method" type="radio"
+                                                        value="<?php echo $_rate->getCode() ?>"
+                                                        id="s_method_<?php echo $_rate->getCode() ?>"
+                                                        checked="checked"/></span>
+                        <?php else: ?>
+                        <!--Instore Fulfillment Method-->
+                        <?php
+                        $placeCode = $_rate->getMethod();
+                        $place = $this->helper('paypal_pickup')->getPlace($placeCode);
+                        $placeId = $place->getPlaceId();
+                        ?>
+                        <span id="shipping-method-please-wait-<?php echo $placeId ?>" class="please-wait"
+                              style="display:none;">
+                                <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>"
+                                     alt="<?php echo $this->__('Loading...') ?>"
+                                     title="<?php echo $this->__('Loading...') ?>"
+                                     class="v-middle"/> <?php echo $this->__('Loading...') ?>
+                            </span>
+                        <input name="place-id-<?php echo $placeId ?>" type="hidden" value="<?php echo $placeId ?>"/>
+                        <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>"
+                               id="s_method_<?php echo $_rate->getCode() ?>"<?php if ($_rate->getCode() === $this->getAddressShippingMethod()) echo ' checked="checked"' ?>
+                               class="radio instore"/>
+                        <!--Instore Fulfillment Method-->
+                        <?php if ($_rate->getCode() === $this->getAddressShippingMethod()): ?>
+                            <script type="text/javascript">
+                                //<![CDATA[
+                                lastPrice = <?php echo (float)$_rate->getPrice(); ?>;
+                                //]]>
+                            </script>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $_rate->getMethodTitle() ?>
+                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                            <?php endif; ?>
+                    </label>
+
+                    <div id="place-content-<?php echo $placeId ?>" class="place-content"></div>
+                    <div style="clear: both;"></div>
+                    <?php endif; ?>
+                </li>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        </ul>
+    </dd>
+    <?php endforeach; ?>
+    <input name="place-id" type="hidden"/>
+    <input name="allow-pickup-datetime" type="hidden"/>
+    <input name="type" type="hidden"/>
+    <input name="datetime-enable-time-selector" type="hidden"/>
+    <input name="place-date" type="hidden"/>
+    <input name="place-hour" type="hidden"/>
+    <input name="place-minute" type="hidden"/>
+    <input name="place-durations-options" type="hidden"/>
+</dl>
+<script type="text/javascript">
+    //<![CDATA[
+        <?php if (!empty($shippingCodePrice)): ?>
+    var shippingCodePrice = {<?php echo implode(',', $shippingCodePrice); ?>};
+        <?php endif; ?>
+    dateConfig = {};
+    $$('input[type="radio"][name="shipping_method"]').each(function (el) {
+        Event.observe(el, 'click', function () {
+            if (el.checked == true && el.previous()) {
+                var placeId = el.previous().getValue();
+                renderPlace(el, placeId);
+            }
+            var elId = el.getAttribute('id');
+            if (elId && (elId.indexOf('instore') == '-1')) {
+                $$('input[type="radio"][name="shipping_method"]').each(function (elm) {
+                    var elmId = elm.getAttribute('id');
+                    if (elmId && (elmId.indexOf('instore') >= 0)) {
+                        if (elm.next(1)) {
+                            elm.next(1).update('');
+                        }
+                    }
+                });
+            }
+            var getShippingCode = el.getValue();
+            <?php if (!empty($shippingCodePrice)): ?>
+                var newPrice = shippingCodePrice[getShippingCode];
+                if (!lastPrice) {
+                    lastPrice = newPrice;
+                    quoteBaseGrandTotal += newPrice;
+                }
+                if (newPrice != lastPrice) {
+                    quoteBaseGrandTotal += (newPrice - lastPrice);
+                    lastPrice = newPrice;
+                }
+            <?php endif; ?>
+            checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+            return false;
+        });
+        if (el.checked == true && el.previous()) {
+            var oldPlaceId = el.previous().getValue();
+            renderPlace(el, oldPlaceId);
+        }
+    });
+    //]]>
+</script>
+<?php endif; ?>

@@ -1,0 +1,12 @@
+<config>
+    <modules>
+        <Paypal_Locationhere>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Paypal_Locationhere>
+        <depends>
+            <Paypal_Pickup/>
+            <Paypal_Checkin/>
+        </depends>
+    </modules>
+</config>    

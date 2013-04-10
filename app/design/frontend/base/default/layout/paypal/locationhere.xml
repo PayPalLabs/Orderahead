@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <checkout_onepage_success>
+        <!-- TO DO : create a block for normal theme
+        <reference name="content">
+            <block type="" name="" template=""/>
+        </reference>-->
+    </checkout_onepage_success>
+</layout>

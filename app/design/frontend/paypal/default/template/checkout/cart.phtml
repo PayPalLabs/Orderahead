@@ -1,0 +1,52 @@
+<?php
+/**
+ * PayPal Checkout
+ *
+ * @package      :  PayPal_Checkout
+ * @version      :  0.9.0
+ * @since        :  Magento 1.7
+ * @author       :  Paypal - http://www.paypal.com
+ * @copyright    :  Copyright (C) 2013 Powered by Paypal
+ * @license      :  http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ * @Creation Date:  19/03/2013
+ * 
+ */
+?>
+<?php $pageName = "Shopping Cart";?>
+<?php $cartParams = $this->getRequest()->getParams(); ?>	
+<div class="content-box greybg">    
+    <div id="productError_<?php echo $cartParams['s']; ?>" style="display:none"></div>
+    <form id="payform_<?php echo $cartParams['s']; ?>" name="payform_<?php echo $cartParams['s']; ?>" action="<?php echo Mage::app()->getStore()->getBaseUrl() ?>/paypal_checkin/index/checkout" method="post">
+        
+        <div id="cart-list-box_<?php echo $cartParams['s'] ?>"></div>
+        
+        <div class="cart-update" id="cart-update_<?php echo $cartParams['s']; ?>" style="display:none">
+            <a href="#" onclick="updatecart(<?php echo $cartParams['s'] ?>);" id="paynow" class="secondary-button"><?php echo $this->__('Update Cart') ?></a>
+        </div>
+            
+        <div id="cart-total-box_<?php echo $cartParams['s'] ?>"></div>			
+            
+        <div id="cart-pickuptime-box_<?php echo $cartParams['s'] ?>"></div>
+            
+        <div id="cart-staticblock-box_<?php echo $cartParams['s']; ?>" style="display:none;"></div>
+            
+        <div class="pay-now" id="pay-now_<?php echo $cartParams['s'] ?>" style="display:none"></div>	
+            
+        <div class="cart-empty" id="cart-empty_<?php echo $cartParams['s'] ?>" style="display:none">
+            <div class="box-shadow">
+                <div class="cart-row1"><?php echo $this->__('SHOPPING CART IS EMPTY') ?></div>
+                <div class="cart-empty-desc cart-row2"><?php echo $this->__('You have no items in your shopping cart.') ?></div>
+            </div>
+            <div class="pay-now" id="contshop_<?php echo $cartParams['s'] ?>">
+                <a href="#" onclick="forwardURL(storeRootUrl);" class="glossy-button"><?php echo $this->__('Continue Shopping') ?></a>
+            </div>
+        </div>
+            
+    </form>
+</div>
+    
+<script>
+    selectNav(3);
+    updateCartCount(<?php echo Mage::helper('paypal_checkout')->getNumberOfItems(); ?>);
+    getCartPageJSON(<?php echo $cartParams['s'] ?>);
+</script>

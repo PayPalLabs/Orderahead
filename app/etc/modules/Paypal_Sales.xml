@@ -1,0 +1,11 @@
+<config>
+    <modules>
+        <Paypal_Sales>
+            <active>true</active>
+            <codePool>community</codePool>
+            <depends>
+                <Paypal_Core/>
+            </depends>
+        </Paypal_Sales>
+    </modules>
+</config>       
