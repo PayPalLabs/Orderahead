@@ -88,8 +88,14 @@ Don't forget to use the website scope to modify all your parameters.
 1. Enter the parameters you were given in the PayPal devportal and save the configuration.
 ![ScreenShot](readmeimages/5a_PayPalcheckin.png)
 
-2. Save your configuration and then go back to the same section and click on "Get new refresh token!".
+2. Disable "add secret key to URLs". In some cases, it can cause trouble for getting the new refresh token, so temporarily, it is gonna be deactivated.
+![ScreenShot](readmeimages/5a2_PayPalcheckin.png)
+
+3. Save your configuration and then go back to the same section and click on "Get new refresh token!".
 ![ScreenShot](readmeimages/5b_PayPalcheckin.png)
+
+4. You can re-enable "add secret key to URLs"
+![ScreenShot](readmeimages/5b2_PayPalcheckin.png)
 
 ###5c. Making sure the instore fulfillment shipping method is activated and configured
 
