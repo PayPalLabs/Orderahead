@@ -38,25 +38,28 @@ Before you register your application and enable the PayPal Check-in into the Mag
 
 ##4. Register an Application with Log in with PayPal
 
-1. Go to PayPal [devportal](https://devportal.x.com).
+1. Go to the PayPal Developer Portal [https://developer.paypal.com/](https://developer.paypal.com).
 
-2. On the Developer Portal page, click Sign in to DevPortal or manage applications.3. 
-![ScreenShot](readmeimages/0_app_login.png)
+2. On the Developer Portal page, click "Log In" and login with your Premier or Merchant account in the popup window. 
+![ScreenShot](readmeimages/0_app_loginpp.png)
 
-3. Log in as PayPal Premier or Merchant Account when prompted.
-![ScreenShot](readmeimages/0b_app_loginpp.png)
+3. Click "Applications" after logging in.
+![ScreenShot](readmeimages/0b_app_login.png)
 
-4. On the Developer Portal page, click on Manage Applications to create new application.
-![ScreenShot](readmeimages/0c_app_register.png)
+4. On the Applications page under "My Apps", click "Create application".
+![ScreenShot](readmeimages/0c_app_create.png)
 
-5. Enter the following informations:
-![ScreenShot](readmeimages/0d_app_create.png)
+5. Enter an Application Name and ensure "Integration type" is set to "Web".
+![ScreenShot](readmeimages/0d_app_start.png)
 
-6. Register application
-![ScreenShot](readmeimages/0e_app_created.png)
+5. Enable "Accept Payments" and follow the onsite instructions if you require live credentials for accepting Credit Cards directly.
+![ScreenShot](readmeimages/0e_app_payments.png)
 
-7. Click on the View Application button to review / modify the application information.
-![ScreenShot](readmeimages/0f_app_review.png)
+6. Click "Log In with PayPal" and fill in the required information. Note the "Return URL" for your app will be similar to: https://d/s/paypal_checkin/index/init_checkin where "d" is your domain name and "s" is your store URL. Log In will only be enabled after the completed form has been saved.
+![ScreenShot](readmeimages/0f_app_info.png)
+
+7. Click "Save" and then "Show" under "REST API Credentials" for your App ID and Secret.
+![ScreenShot](readmeimages/0g_app_credentials.png)
 
 8. Note: PayPal Checkin is a new feature and access to it is currently controlled. To enable this feature for your merchant PayPal account, please file a ticket with PayPal Merchant Technical Support (MTS) as follows:
 
