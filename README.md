@@ -58,7 +58,7 @@ Before you register your application and enable the PayPal Check-in into the Mag
 6. Click "Log In with PayPal" and fill in the required information. Note the "Return URL" for your app will be similar to: https://d/s/paypal_checkin/index/init_checkin where "d" is your domain name and "s" is your store URL. Log In will only be enabled after the completed form has been saved.
 ![ScreenShot](readmeimages/0f_app_info.png)
 
-7. Click "Save" and then "Show" under "REST API Credentials" for your App ID and Secret.
+7. Click "Save" and then "Show" under "REST API Credentials" for your Application ID (Client ID) and Secret.
 ![ScreenShot](readmeimages/0g_app_credentials.png)
 
 8. Note: PayPal Checkin is a new feature and access to it is currently controlled. To enable this feature for your merchant PayPal account, please file a ticket with PayPal Merchant Technical Support (MTS) as follows:
